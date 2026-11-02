@@ -1,0 +1,1280 @@
+{
+ "schema_version": 1,
+ "id": "sample",
+ "sample": true,
+ "generated_at": "2026-11-02T12:00:00Z",
+ "timezone": "America/Denver",
+ "activity": "speedflying",
+ "run": {
+  "trigger": "manual",
+  "model": null,
+  "commit": null
+ },
+ "slots": [
+  {
+   "id": "d1-am",
+   "date": "2026-11-02",
+   "part": "am",
+   "label": "Mon AM",
+   "basis": "forecast+obs"
+  },
+  {
+   "id": "d1-pm",
+   "date": "2026-11-02",
+   "part": "pm",
+   "label": "Mon PM",
+   "basis": "forecast"
+  },
+  {
+   "id": "d2-am",
+   "date": "2026-11-03",
+   "part": "am",
+   "label": "Tue AM",
+   "basis": "forecast"
+  },
+  {
+   "id": "d2-pm",
+   "date": "2026-11-03",
+   "part": "pm",
+   "label": "Tue PM",
+   "basis": "forecast"
+  },
+  {
+   "id": "d3-am",
+   "date": "2026-11-04",
+   "part": "am",
+   "label": "Wed AM",
+   "basis": "forecast"
+  },
+  {
+   "id": "d3-pm",
+   "date": "2026-11-04",
+   "part": "pm",
+   "label": "Wed PM",
+   "basis": "forecast"
+  }
+ ],
+ "groups": [
+  {
+   "id": "salt-lake-city-area",
+   "name": "Salt Lake City Area",
+   "synoptic": {
+    "summary": "Sunday's cold front has cleared east. Post-frontal NW flow aloft eases through Monday as a ridge builds Tuesday — light gradient, classic diurnal cycle. Wednesday the ridge shifts east and flow aloft turns SSW ahead of the next trough.",
+    "pressure": {
+     "system": "ridge",
+     "value_mb": 1024,
+     "trend": "rising",
+     "significance": "Rising pressure behind the front; ridge overhead Tuesday is the most favorable day."
+    },
+    "afd_excerpt": "SAMPLE — not a real AFD quote.",
+    "links": [
+     {
+      "label": "AFD — SLC",
+      "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+     },
+     {
+      "label": "GFA",
+      "url": "https://www.aviationweather.gov/gfa"
+     },
+     {
+      "label": "Surface prog",
+      "url": "https://www.aviationweather.gov/progchart/sfc"
+     },
+     {
+      "label": "SPC outlook",
+      "url": "https://www.spc.noaa.gov/products/outlook/"
+     }
+    ]
+   },
+   "observations": {
+    "as_of": "2026-11-02T11:55:00Z",
+    "summary": "Drainage S at E7701, KSLC already NW — transition zone near POM. Add 3–8 kt for launch elevation.",
+    "stations": [
+     {
+      "id": "E7701",
+      "name": "Point of the Mountain",
+      "url": "https://www.weather.gov/wrh/timeseries?site=E7701&hours=72",
+      "summary": "S 170°/3 kt"
+     },
+     {
+      "id": "KSLC",
+      "name": "Salt Lake Intl",
+      "url": "https://www.weather.gov/wrh/timeseries?site=KSLC&hours=72",
+      "summary": "NW 320°/8 kt"
+     },
+     {
+      "id": "FPS",
+      "name": "Spanish Fork",
+      "url": "https://www.weather.gov/wrh/timeseries?site=FPS&hours=72",
+      "summary": "SSE 160°/5 kt"
+     },
+     {
+      "id": "KPVU",
+      "name": "Provo",
+      "url": "https://www.weather.gov/wrh/timeseries?site=KPVU&hours=72",
+      "summary": "calm"
+     }
+    ],
+    "map_url": "https://www.weather.gov/wrh/hazards?obs=true&wfo=slc"
+   },
+   "spots": [
+    {
+     "id": "pom-south",
+     "name": "POM South",
+     "lat": 40.4567,
+     "lon": -111.9027,
+     "faces": "S · 160°–200°",
+     "elevation_ft": 5148,
+     "links": [
+      {
+       "label": "UHGPGA site guide",
+       "url": "https://www.uhgpga.org/pom-south-side"
+      }
+     ],
+     "cells": {
+      "d1-am": {
+       "rating": "marginal",
+       "chance": 40,
+       "confidence": "medium",
+       "headline": "Light S drainage under NW flow aloft",
+       "wind": {
+        "launch": {
+         "dir_deg": 170,
+         "speed_kt": [
+          4,
+          9
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 320,
+          "speed_kt": 22
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 320,
+          "speed_kt": 28
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 160°–200°",
+         "result": "pass",
+         "detail": "Launch est. 170° from E7701 S 3 kt +3–8 kt correction"
+        },
+        {
+         "rule": "Speed ≤ 22 kt incl. gusts",
+         "result": "pass",
+         "detail": "4–9 kt"
+        },
+        {
+         "rule": "No rotor trigger aloft",
+         "result": "warn",
+         "detail": "NW 22–28 kt aloft — not a listed POM South trigger, but gradient opposes the drainage"
+        },
+        {
+         "rule": "Obs agree with forecast",
+         "result": "warn",
+         "detail": "E7701 S 3 kt, KSLC NW 8 kt — transition zone near POM"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Wind increase before launch",
+         "why": "Speedflyers are committed once airborne — the only abort is not launching.",
+         "triggered_by": "Site field warning (POM South)",
+         "investigate": "If wind at launch builds while you set up, pack up."
+        }
+       ],
+       "explanation": "Post-frontal NW flow aloft fights the morning south drainage. The drainage is there but weak (E7701 S 3 kt at 05:00), and KSLC already shows NW — the switch could come early. Short, uncertain window right after sunrise.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ],
+       "window": "07:15–08:30"
+      },
+      "d1-pm": {
+       "rating": "nogo",
+       "chance": 5,
+       "confidence": "high",
+       "headline": "N flow — tail wind on a south face",
+       "wind": {
+        "launch": {
+         "dir_deg": 330,
+         "speed_kt": [
+          8,
+          14
+         ],
+         "gust_kt": 18
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 320,
+          "speed_kt": 18
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 330,
+          "speed_kt": 24
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 160°–200°",
+         "result": "fail",
+         "detail": "330° forecast at launch"
+        }
+       ],
+       "warnings": [],
+       "explanation": "Afternoon N flow puts POM South in the lee.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d2-am": {
+       "rating": "go",
+       "chance": 85,
+       "confidence": "medium",
+       "headline": "Ridge, clean S drainage",
+       "wind": {
+        "launch": {
+         "dir_deg": 175,
+         "speed_kt": [
+          6,
+          11
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 290,
+          "speed_kt": 8
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 280,
+          "speed_kt": 12
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 160°–200°",
+         "result": "pass",
+         "detail": "175°"
+        },
+        {
+         "rule": "Speed ≤ 22 kt incl. gusts",
+         "result": "pass",
+         "detail": "6–11 kt"
+        },
+        {
+         "rule": "No rotor trigger aloft",
+         "result": "pass",
+         "detail": "WNW 8–12 kt aloft, light"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Midday thermal transition",
+         "why": "Thermals near terrain make a speedflying line rough and unpredictable; the diurnal switch passes through POM around midday.",
+         "triggered_by": "Clear skies, ridge, mixing height ~9,000 ft by 13:00",
+         "investigate": "Watch the valley stations for the S→N switch; fly before thermals start or after the switch settles."
+        },
+        {
+         "severity": "abort",
+         "title": "Wind increase before launch",
+         "why": "Speedflyers are committed once airborne — the only abort is not launching.",
+         "triggered_by": "Site field warning (POM South)",
+         "investigate": "If wind at launch builds while you set up, pack up."
+        }
+       ],
+       "explanation": "Ridge builds overnight, gradient light. Classic morning: S drainage on the face until the switch around 11:00.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ],
+       "window": "07:30–10:30"
+      },
+      "d2-pm": {
+       "rating": "nogo",
+       "chance": 10,
+       "confidence": "medium",
+       "headline": "Diurnal switch to N",
+       "wind": {
+        "launch": {
+         "dir_deg": 340,
+         "speed_kt": [
+          6,
+          10
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 310,
+          "speed_kt": 9
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 290,
+          "speed_kt": 12
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 160°–200°",
+         "result": "fail",
+         "detail": "340°"
+        }
+       ],
+       "warnings": [],
+       "explanation": "After the switch POM South is in the lee.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d3-am": {
+       "rating": "go",
+       "chance": 75,
+       "confidence": "medium",
+       "headline": "S drainage + light S gradient",
+       "wind": {
+        "launch": {
+         "dir_deg": 180,
+         "speed_kt": [
+          8,
+          14
+         ],
+         "gust_kt": 16
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 200,
+          "speed_kt": 9
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 210,
+          "speed_kt": 14
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 160°–200°",
+         "result": "pass",
+         "detail": "180°"
+        },
+        {
+         "rule": "Speed ≤ 22 kt incl. gusts",
+         "result": "pass",
+         "detail": "8–14 G16 kt"
+        },
+        {
+         "rule": "No rotor trigger aloft",
+         "result": "pass",
+         "detail": "SSW 9–14 kt aloft"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Wind increase before launch",
+         "why": "Speedflyers are committed once airborne — the only abort is not launching.",
+         "triggered_by": "Site field warning (POM South)",
+         "investigate": "If wind at launch builds while you set up, pack up."
+        }
+       ],
+       "explanation": "Ridge shifts east, flow aloft turns SSW. Drainage plus gradient — stronger and steadier than Tuesday, and the switch may be late.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ],
+       "window": "07:30–11:00"
+      },
+      "d3-pm": {
+       "rating": "marginal",
+       "chance": 35,
+       "confidence": "low",
+       "headline": "S gradient may hold — gusty",
+       "wind": {
+        "launch": {
+         "dir_deg": 190,
+         "speed_kt": [
+          12,
+          18
+         ],
+         "gust_kt": 24
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 200,
+          "speed_kt": 14
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 210,
+          "speed_kt": 19
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 160°–200°",
+         "result": "pass",
+         "detail": "190°"
+        },
+        {
+         "rule": "Speed ≤ 22 kt incl. gusts",
+         "result": "fail",
+         "detail": "Gusts to 24 kt possible"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Midday thermal transition",
+         "why": "Thermals near terrain make a speedflying line rough and unpredictable; the diurnal switch passes through POM around midday.",
+         "triggered_by": "Clear skies, ridge, mixing height ~9,000 ft by 13:00",
+         "investigate": "Watch the valley stations for the S→N switch; fly before thermals start or after the switch settles."
+        }
+       ],
+       "explanation": "If the S gradient overrides the diurnal switch, POM South stays on but gusts approach the max.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "pom-north",
+     "name": "POM North",
+     "lat": 40.4745,
+     "lon": -111.8928,
+     "faces": "N · 270°–360°",
+     "elevation_ft": 5100,
+     "links": [
+      {
+       "label": "UHGPGA site guide",
+       "url": "https://www.uhgpga.org/pom-north-side"
+      }
+     ],
+     "cells": {
+      "d1-am": {
+       "rating": "nogo",
+       "chance": 15,
+       "confidence": "medium",
+       "headline": "Drainage S + NW rotor aloft",
+       "wind": {
+        "launch": {
+         "dir_deg": 190,
+         "speed_kt": [
+          3,
+          8
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 320,
+          "speed_kt": 22
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 320,
+          "speed_kt": 28
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 270°–360°",
+         "result": "fail",
+         "detail": "S drainage at launch"
+        },
+        {
+         "rule": "No rotor trigger aloft",
+         "result": "fail",
+         "detail": "NW 28 kt at 9,000 ft"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "NW flow aloft — Steep Mountain rotor",
+         "why": "Strong NW flow over Steep Mountain leaves a lee rotor at launch height on the north side.",
+         "triggered_by": "Winds aloft 9,000 ft 320°/28 kt (FD 12h)",
+         "investigate": "Brisk + buoyant feel at the top or the sock cycling calm→strong = rotor. Do not launch."
+        }
+       ],
+       "explanation": "Morning drainage is a tail wind here, and the NW flow aloft is the Steep Mountain rotor trigger.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d1-pm": {
+       "rating": "nogo",
+       "chance": 20,
+       "confidence": "medium",
+       "headline": "On-face, but NW rotor trigger aloft",
+       "wind": {
+        "launch": {
+         "dir_deg": 330,
+         "speed_kt": [
+          10,
+          16
+         ],
+         "gust_kt": 20
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 320,
+          "speed_kt": 18
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 330,
+          "speed_kt": 24
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 270°–360°",
+         "result": "pass",
+         "detail": "330°"
+        },
+        {
+         "rule": "Speed ≤ max",
+         "result": "na",
+         "detail": "No speedflying max set for POM North"
+        },
+        {
+         "rule": "No rotor trigger aloft",
+         "result": "fail",
+         "detail": "NW 24 kt at 9,000 ft"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "NW flow aloft — Steep Mountain rotor",
+         "why": "Strong NW flow over Steep Mountain leaves a lee rotor at launch height on the north side.",
+         "triggered_by": "Winds aloft 9,000 ft 320°/28 kt (FD 12h)",
+         "investigate": "Brisk + buoyant feel at the top or the sock cycling calm→strong = rotor. Do not launch."
+        }
+       ],
+       "explanation": "Surface direction is perfect, but this is exactly the setup that rotors off Steep Mountain.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d2-am": {
+       "rating": "nogo",
+       "chance": 10,
+       "confidence": "medium",
+       "headline": "S drainage — tail wind",
+       "wind": {
+        "launch": {
+         "dir_deg": 175,
+         "speed_kt": [
+          6,
+          11
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 290,
+          "speed_kt": 8
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 280,
+          "speed_kt": 12
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 270°–360°",
+         "result": "fail",
+         "detail": "175°"
+        }
+       ],
+       "warnings": [],
+       "explanation": "Morning belongs to the south side.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d2-pm": {
+       "rating": "go",
+       "chance": 80,
+       "confidence": "medium",
+       "headline": "Clean N switch under a ridge",
+       "wind": {
+        "launch": {
+         "dir_deg": 340,
+         "speed_kt": [
+          8,
+          12
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 310,
+          "speed_kt": 9
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 290,
+          "speed_kt": 12
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 270°–360°",
+         "result": "pass",
+         "detail": "340°"
+        },
+        {
+         "rule": "Speed ≤ max",
+         "result": "na",
+         "detail": "No speedflying max set; 8–12 kt is within P2/M1 range"
+        },
+        {
+         "rule": "No rotor trigger aloft",
+         "result": "pass",
+         "detail": "WNW 9–12 kt aloft — light"
+        }
+       ],
+       "warnings": [],
+       "explanation": "Light gradient lets the diurnal switch complete. Smoothest about 2 h before sunset (~15:00–17:00).",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ],
+       "window": "15:00–17:00"
+      },
+      "d3-am": {
+       "rating": "nogo",
+       "chance": 5,
+       "confidence": "medium",
+       "headline": "S drainage + S gradient",
+       "wind": {
+        "launch": {
+         "dir_deg": 180,
+         "speed_kt": [
+          8,
+          14
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 200,
+          "speed_kt": 9
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 210,
+          "speed_kt": 14
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 270°–360°",
+         "result": "fail",
+         "detail": "180°"
+        }
+       ],
+       "warnings": [],
+       "explanation": "Tail wind.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d3-pm": {
+       "rating": "marginal",
+       "chance": 35,
+       "confidence": "low",
+       "headline": "Switch may not happen",
+       "wind": {
+        "launch": {
+         "dir_deg": 350,
+         "speed_kt": [
+          4,
+          9
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 200,
+          "speed_kt": 14
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 210,
+          "speed_kt": 19
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 270°–360°",
+         "result": "warn",
+         "detail": "N if the switch happens; S gradient may hold"
+        },
+        {
+         "rule": "No rotor trigger aloft",
+         "result": "pass",
+         "detail": "SSW aloft, not a POM North trigger"
+        }
+       ],
+       "warnings": [],
+       "explanation": "SSW gradient aloft could suppress the afternoon switch. Watch KSLC vs south valley stations at 14:00.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "cherry",
+     "name": "Cherry",
+     "lat": 40.5153,
+     "lon": -111.827,
+     "faces": "NNW · 320°–020°",
+     "elevation_ft": 7200,
+     "links": [],
+     "cells": {
+      "d1-am": {
+       "rating": "marginal",
+       "chance": 40,
+       "confidence": "low",
+       "headline": "On-face NW, but 22–28 kt aloft",
+       "wind": {
+        "launch": {
+         "dir_deg": 320,
+         "speed_kt": [
+          6,
+          12
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 320,
+          "speed_kt": 22
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 320,
+          "speed_kt": 28
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 320°–020°",
+         "result": "pass",
+         "detail": "320°"
+        },
+        {
+         "rule": "Very light wind only",
+         "result": "warn",
+         "detail": "6–12 kt est. — more than Cherry likes"
+        },
+        {
+         "rule": "No S flow aloft",
+         "result": "pass",
+         "detail": "NW aloft"
+        }
+       ],
+       "warnings": [],
+       "explanation": "Direction suits the face and there's no south rotor risk, but post-frontal NW flow is stronger than Cherry tolerates.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d1-pm": {
+       "rating": "nogo",
+       "chance": 15,
+       "confidence": "medium",
+       "headline": "Thermal + NW gradient",
+       "wind": {
+        "launch": {
+         "dir_deg": 320,
+         "speed_kt": [
+          10,
+          16
+         ],
+         "gust_kt": 20
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 320,
+          "speed_kt": 18
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 330,
+          "speed_kt": 24
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Very light wind only",
+         "result": "fail",
+         "detail": "10–16 G20 kt"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Midday thermal transition",
+         "why": "Thermals near terrain make a speedflying line rough and unpredictable; the diurnal switch passes through POM around midday.",
+         "triggered_by": "Clear skies, ridge, mixing height ~9,000 ft by 13:00",
+         "investigate": "Watch the valley stations for the S→N switch; fly before thermals start or after the switch settles."
+        }
+       ],
+       "explanation": "Too much wind for Cherry.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d2-am": {
+       "rating": "go",
+       "chance": 70,
+       "confidence": "medium",
+       "headline": "Calm ridge morning",
+       "wind": {
+        "launch": {
+         "dir_deg": 340,
+         "speed_kt": [
+          0,
+          5
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 290,
+          "speed_kt": 8
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 280,
+          "speed_kt": 12
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction in 320°–020°",
+         "result": "pass",
+         "detail": "Light, ~340°"
+        },
+        {
+         "rule": "Very light wind only",
+         "result": "pass",
+         "detail": "0–5 kt"
+        },
+        {
+         "rule": "No S flow aloft",
+         "result": "pass",
+         "detail": "WNW 8–12 kt"
+        }
+       ],
+       "warnings": [],
+       "explanation": "Best Cherry setup of the period: light gradient, no south flow aloft.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ],
+       "window": "08:00–10:30"
+      },
+      "d2-pm": {
+       "rating": "marginal",
+       "chance": 45,
+       "confidence": "medium",
+       "headline": "Light but thermic",
+       "wind": {
+        "launch": {
+         "dir_deg": 330,
+         "speed_kt": [
+          5,
+          10
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 310,
+          "speed_kt": 9
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 290,
+          "speed_kt": 12
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Very light wind only",
+         "result": "warn",
+         "detail": "5–10 kt, thermic"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Midday thermal transition",
+         "why": "Thermals near terrain make a speedflying line rough and unpredictable; the diurnal switch passes through POM around midday.",
+         "triggered_by": "Clear skies, ridge, mixing height ~9,000 ft by 13:00",
+         "investigate": "Watch the valley stations for the S→N switch; fly before thermals start or after the switch settles."
+        }
+       ],
+       "explanation": "Flyable direction; thermals near terrain are the concern.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d3-am": {
+       "rating": "marginal",
+       "chance": 35,
+       "confidence": "medium",
+       "headline": "S flow aloft starting",
+       "wind": {
+        "launch": {
+         "dir_deg": 0,
+         "speed_kt": [
+          2,
+          6
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 200,
+          "speed_kt": 9
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 210,
+          "speed_kt": 14
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "No S flow aloft",
+         "result": "warn",
+         "detail": "SSW 14 kt at 9,000 ft"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "South flow aloft — Cherry rotor",
+         "why": "Southerly flow over the ridge puts Cherry's NNW face in the lee — rotor at launch.",
+         "triggered_by": "Winds aloft 9,000 ft 210°/14 kt (FD)",
+         "investigate": "Any irregular lift/sink or gusts from behind on approach → do not launch."
+        }
+       ],
+       "explanation": "Surface is calm, but south flow aloft is the rotor trigger.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      },
+      "d3-pm": {
+       "rating": "nogo",
+       "chance": 10,
+       "confidence": "medium",
+       "headline": "S flow aloft — rotor",
+       "wind": {
+        "launch": {
+         "dir_deg": 200,
+         "speed_kt": [
+          4,
+          10
+         ]
+        },
+        "aloft": [
+         {
+          "level": "6,000 ft",
+          "dir_deg": 200,
+          "speed_kt": 14
+         },
+         {
+          "level": "9,000 ft (700 mb)",
+          "dir_deg": 210,
+          "speed_kt": 19
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "No S flow aloft",
+         "result": "fail",
+         "detail": "SSW 19 kt at 9,000 ft"
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "South flow aloft — Cherry rotor",
+         "why": "Southerly flow over the ridge puts Cherry's NNW face in the lee — rotor at launch.",
+         "triggered_by": "Winds aloft 9,000 ft 210°/19 kt (FD)",
+         "investigate": "Any irregular lift/sink or gusts from behind on approach → do not launch."
+        }
+       ],
+       "explanation": "Classic Cherry rotor setup.",
+       "sources": [
+        {
+         "label": "AFD SLC",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        },
+        {
+         "label": "Winds aloft 12h",
+         "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12"
+        },
+        {
+         "label": "TAF KSLC/KPVU",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw"
+        }
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "label": "AFD SLC",
+   "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD",
+   "fetched_at": "2026-11-02T11:58:00Z",
+   "ok": true
+  },
+  {
+   "label": "Winds aloft 12h",
+   "url": "https://aviationweather.gov/api/data/windtemp?region=slc&level=low&fcst=12",
+   "fetched_at": "2026-11-02T11:58:00Z",
+   "ok": true
+  },
+  {
+   "label": "TAF KSLC, KPVU",
+   "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=raw",
+   "fetched_at": "2026-11-02T11:58:00Z",
+   "ok": true
+  },
+  {
+   "label": "Obs E7701",
+   "url": "https://api.weather.gov/stations/E7701/observations?limit=5",
+   "fetched_at": "2026-11-02T11:59:00Z",
+   "ok": true
+  }
+ ]
+}

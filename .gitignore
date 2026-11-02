@@ -1,0 +1,4 @@
+.claude/settings.local.json
+.claude/worktrees/
+weather-flying-workspace/
+__pycache__/

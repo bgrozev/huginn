@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huginn.mustelinae.net/schema/report.schema.json",
+  "title": "Huginn report v1",
+  "type": "object",
+  "required": ["schema_version", "id", "generated_at", "timezone", "activity", "slots", "groups", "sources"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[\\w-]+$", "description": "Run id, e.g. 2026-11-02T1200Z. File name under site/reports/." },
+    "sample": { "type": "boolean" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "timezone": { "type": "string" },
+    "activity": { "enum": ["speedflying", "paragliding"] },
+    "run": {
+      "type": "object",
+      "properties": {
+        "trigger": { "enum": ["schedule", "manual"] },
+        "model": { "type": ["string", "null"] },
+        "commit": { "type": ["string", "null"] }
+      }
+    },
+    "slots": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "$ref": "#/$defs/slot" } },
+    "groups": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/group" } },
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } }
+  },
+  "$defs": {
+    "rating": { "enum": ["go", "marginal", "nogo", "unknown"] },
+    "link": {
+      "type": "object", "required": ["label", "url"],
+      "properties": { "label": { "type": "string" }, "url": { "type": "string", "pattern": "^https?://" } }
+    },
+    "source": {
+      "type": "object", "required": ["label", "url"],
+      "properties": {
+        "label": { "type": "string" }, "url": { "type": "string", "pattern": "^https?://" },
+        "fetched_at": { "type": "string", "format": "date-time" }, "ok": { "type": "boolean" }
+      }
+    },
+    "slot": {
+      "type": "object", "required": ["id", "date", "part", "label", "basis"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^d[1-4]-(am|pm)$" },
+        "date": { "type": "string", "format": "date" },
+        "part": { "enum": ["am", "pm"] },
+        "label": { "type": "string" },
+        "basis": { "enum": ["forecast", "forecast+obs"] }
+      }
+    },
+    "speed": {
+      "description": "Knots. Number or [low, high].",
+      "oneOf": [
+        { "type": "number", "minimum": 0 },
+        { "type": "array", "items": { "type": "number", "minimum": 0 }, "minItems": 2, "maxItems": 2 }
+      ]
+    },
+    "wind": {
+      "type": "object",
+      "properties": {
+        "level": { "type": "string" },
+        "dir_deg": { "type": ["number", "null"], "minimum": 0, "maximum": 360 },
+        "speed_kt": { "$ref": "#/$defs/speed" },
+        "gust_kt": { "$ref": "#/$defs/speed" },
+        "text": { "type": "string" }
+      }
+    },
+    "check": {
+      "type": "object", "required": ["rule", "result"],
+      "properties": { "rule": { "type": "string" }, "result": { "enum": ["pass", "warn", "fail", "na"] }, "detail": { "type": "string" } }
+    },
+    "warning": {
+      "type": "object", "required": ["severity", "title"],
+      "properties": {
+        "severity": { "enum": ["info", "caution", "abort"] },
+        "title": { "type": "string" },
+        "why": { "type": "string" },
+        "triggered_by": { "type": "string" },
+        "investigate": { "type": "string" }
+      }
+    },
+    "cell": {
+      "type": "object", "required": ["rating", "chance", "confidence", "headline"],
+      "properties": {
+        "rating": { "$ref": "#/$defs/rating" },
+        "chance": { "type": ["integer", "null"], "minimum": 0, "maximum": 100, "description": "Est. chance the spot's criteria are met. Not model confidence." },
+        "confidence": { "enum": ["high", "medium", "low", "unknown"], "description": "Data quality / agreement." },
+        "headline": { "type": "string" },
+        "window": { "type": "string" },
+        "wind": {
+          "type": "object",
+          "properties": { "launch": { "$ref": "#/$defs/wind" }, "aloft": { "type": "array", "items": { "$ref": "#/$defs/wind" } } }
+        },
+        "checks": { "type": "array", "items": { "$ref": "#/$defs/check" } },
+        "warnings": { "type": "array", "items": { "$ref": "#/$defs/warning" } },
+        "explanation": { "type": "string" },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/link" } }
+      }
+    },
+    "spot": {
+      "type": "object", "required": ["id", "name", "cells"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[\\w-]+$" },
+        "name": { "type": "string" },
+        "lat": { "type": "number" }, "lon": { "type": "number" },
+        "faces": { "type": "string" },
+        "elevation_ft": { "type": "number" },
+        "links": { "type": "array", "items": { "$ref": "#/$defs/link" } },
+        "cells": { "type": "object", "additionalProperties": { "$ref": "#/$defs/cell" } }
+      }
+    },
+    "group": {
+      "type": "object", "required": ["id", "name", "spots"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[\\w-]+$" },
+        "name": { "type": "string" },
+        "synoptic": {
+          "type": "object",
+          "properties": {
+            "summary": { "type": "string" },
+            "afd_excerpt": { "type": "string" },
+            "pressure": {
+              "type": "object",
+              "properties": {
+                "system": { "enum": ["high", "low", "ridge", "trough", "front", "neutral"] },
+                "value_mb": { "type": ["number", "null"] },
+                "trend": { "enum": ["rising", "falling", "steady"] },
+                "significance": { "type": "string" }
+              }
+            },
+            "links": { "type": "array", "items": { "$ref": "#/$defs/link" } }
+          }
+        },
+        "observations": {
+          "type": "object",
+          "properties": {
+            "as_of": { "type": "string", "format": "date-time" },
+            "summary": { "type": "string" },
+            "stations": {
+              "type": "array",
+              "items": {
+                "type": "object", "required": ["id", "name"],
+                "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "url": { "type": "string" }, "summary": { "type": "string" } }
+              }
+            },
+            "map_url": { "type": "string" }
+          }
+        },
+        "spots": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/spot" } }
+      }
+    }
+  }
+}
