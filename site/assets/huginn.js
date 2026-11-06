@@ -29,6 +29,13 @@
     return [spot.face_deg != null ? `faces ${spot.face_deg}°` : '', arc].filter(Boolean).join(' · ');
   }
 
+  // " 07:02–12:00" in the report's time zone; AM runs sunrise–12:00, PM 12:00–sunset.
+  function slotHours(slot) {
+    if (!slot.starts_at || !slot.ends_at) return '';
+    const t = (iso) => fmtLocal(iso, report.timezone, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+    return ` ${t(slot.starts_at)}–${t(slot.ends_at)}`;
+  }
+
   // Winds aloft are labeled above landing, so say how high the launch is above it.
   function launchHeight(spot) {
     if (spot.elevation_ft == null) return '';
@@ -195,7 +202,7 @@
         <span class="tip" tabindex="0" data-tip="${esc(dateOf(d.date, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }))}">
         ${esc(dateOf(d.date, { weekday: 'short' }))} <span class="date">${esc(dateOf(d.date, { month: 'short', day: 'numeric' }))}</span></span></th>`).join('');
     const partRow = slots.map((s) => `<th class="part ${colClass(s)}" scope="col">
-        <span class="tip" tabindex="0" data-tip="${s.part === 'am' ? 'Morning' : 'Afternoon/evening'} · ${s.basis === 'forecast+obs' ? 'forecast + current observations' : 'forecast only'}${isPast(s) ? ' · already over' : ''}">
+        <span class="tip" tabindex="0" data-tip="${s.part === 'am' ? 'Morning' : 'Afternoon/evening'}${slotHours(s)} · ${s.basis === 'forecast+obs' ? 'forecast + current observations' : 'forecast only'}${isPast(s) ? ' · already over' : ''}">
         ${esc(s.part === 'am' ? 'AM' : 'PM')}${s.basis === 'forecast+obs' ? ' ●' : ''}</span></th>`).join('');
 
     const rows = group.spots.map((spot) => {
