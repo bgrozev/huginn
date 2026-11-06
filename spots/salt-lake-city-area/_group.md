@@ -28,12 +28,12 @@ Point of the Mountain (POM) sits at the gap between Salt Lake Valley (north) and
 
 ## Dominant diurnal pattern
 
-Cold air drains south-to-north toward the Great Salt Lake each morning (drainage flow). Valley
-heating reverses this to a north-to-south return flow in the afternoon/evening. The switchover
+Cold air drains down-valley toward the Great Salt Lake each morning — flow from ~160°–200° at POM
+(drainage). Valley heating reverses it to flow from ~320°–360° in the afternoon/evening. The switchover
 point moves geographically through the day.
 
-- **Morning**: south wind → loads **POM South**.
-- **Afternoon/evening**: north wind → loads **POM North**.
+- **Morning**: flow from ~160°–200° → loads **POM South**.
+- **Afternoon/evening**: flow from ~320°–360° → loads **POM North**.
 - **Timing of the switch** depends on gradient strength. Light gradient (ridge): switch earlier and
   more complete. Strong gradient: diurnal pattern suppressed or delayed.
 
@@ -43,21 +43,22 @@ point moves geographically through the day.
 
 The valley floor is ~4,500 ft. Watch winds aloft **~2,000–5,500 ft above the POM landings**: light valley wind under
 **20+ kt** at those levels means the calm ends when the boundary layer deepens, typically **late
-morning (~10:00)**. With a strong S gradient this is what closes the POM South morning slot.
+morning (~10:00)**. With a strong ~180° gradient this is what closes the POM South morning slot.
 
 ## Fronts here
 
-Post-frontal flow in the Intermountain West is usually strong, gusty **NW** for a day or so after a
+Post-frontal flow in the Intermountain West is usually strong, gusty, from **~300°–330°** for a day or so after a
 cold front — directly the Steep Mountain rotor trigger for POM North.
 
 ## Reading the stations
 
-- South-valley station reports south flow → POM South likely active.
-- KSLC reports N/NW but the south-valley station still reports S → transition zone at or near POM.
+- South-valley station reports flow from ~160°–200° → POM South likely active.
+- KSLC reports ~300°–360° but the south-valley station still reports ~160°–200° → transition zone at
+  or near POM.
 - Both report the same direction → gradient has overridden the diurnal pattern.
 
 **E7701** (Point of the Mountain) is the most direct launch-area reference when it reports.
-**FPS** (Spanish Fork) is the best indicator for south valley flow / POM South conditions.
+**FPS** (Spanish Fork) is the best indicator for the morning drainage / POM South conditions.
 
 ## Elevation correction
 

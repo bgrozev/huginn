@@ -76,7 +76,7 @@ Write `site/reports/<RUN_ID>.json`:
 - `slots` from the raw data.
 - `groups[]`: `id`, `name`, `synoptic`, `observations` (`as_of`, `summary`, `stations` with
   structured `wind` from the newest observation, `links` from `_group.md`: NWS observations map
-  and Windy), `spots[]` with `id`, `name`, `lat`/`lon` (launch), `face`, `flyable_arc_deg`,
+  and Windy), `spots[]` with `id`, `name`, `lat`/`lon` (launch), `face_deg`, `flyable_arc_deg`,
   `elevation_ft` (launch), `landing_elevation_ft`, `links` from the spot file, and `cells` keyed by
   every slot id.
 - Each cell's `sources`: the links that support it (forecast discussion page, winds-aloft URL,

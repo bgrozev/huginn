@@ -26,7 +26,7 @@
   function spotSubtitle(spot) {
     const a = spot.flyable_arc_deg;
     const arc = a ? `wind ${a[0]}°–${a[1]}°` : '';
-    return [spot.face ? `${spot.face}-facing` : '', arc].filter(Boolean).join(' · ');
+    return [spot.face_deg != null ? `faces ${spot.face_deg}°` : '', arc].filter(Boolean).join(' · ');
   }
 
   // Winds aloft are labeled above landing, so say how high the launch is above it.

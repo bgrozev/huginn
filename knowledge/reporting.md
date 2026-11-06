@@ -30,7 +30,7 @@ quality separately as `confidence` (high/medium/low).
 
 Each warning should teach, not just alarm — but stay short:
 
-- **title** — short and plain, e.g. "South flow aloft — rotor risk", "Possible high wind"
+- **title** — short and plain, e.g. "Flow aloft from 200° — rotor risk", "Possible high wind"
 - **why** — the mechanism (what the terrain/air does). Omit when obvious (e.g. high wind).
 - **triggered_by** — the data that fired it (value + source)
 - **investigate** — what the pilot should check on site (sock behaviour, valley station, virga, etc.)
@@ -43,8 +43,9 @@ Each warning should teach, not just alarm — but stay short:
   reference for every launch on the hill. Not "AGL", not a pressure level (mb), not MSL.
 - Winds in structured fields are numbers (`dir_deg`, `speed_kt`, `gust_kt`); the site draws the
   arrow. Always fill those numbers (the most representative direction, the speed range) and never
-  use the `text` field — it replaces the arrow. Timing and shifts go in `explanation` or `checks`. Don't add compass letters next to degrees ("160°", not "SSE 160°"). Prose can still say
-  "south drainage".
+  use the `text` field — it replaces the arrow. Timing and shifts go in `explanation` or `checks`.
+- **Directions are always degrees** ("flow from 330°", "160°–200°") — never compass names or
+  abbreviations (N, NNW, "north-west", "southerly"), in structured fields or prose.
 - Name stations and products in plain words; put codes in parentheses only where useful:
   "Point of the Mountain station", "Salt Lake airport (KSLC)" — not "E7701", "KSLC".
 - Link labels say what the page is: "NWS forecast discussion (Salt Lake City)", "Winds aloft

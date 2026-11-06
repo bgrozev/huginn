@@ -151,7 +151,7 @@
      "name": "POM South",
      "lat": 40.4567,
      "lon": -111.9027,
-     "face": "S",
+     "face_deg": 150,
      "flyable_arc_deg": [
       160,
       200
@@ -553,7 +553,7 @@
      "name": "POM North",
      "lat": 40.4745,
      "lon": -111.8928,
-     "face": "N",
+     "face_deg": 330,
      "flyable_arc_deg": [
       270,
       360
@@ -921,7 +921,7 @@
      "name": "Cherry",
      "lat": 40.5153,
      "lon": -111.827,
-     "face": "NNW",
+     "face_deg": 305,
      "flyable_arc_deg": [
       320,
       20

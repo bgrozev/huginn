@@ -128,11 +128,11 @@ cells[C]["d3-pm"] = cell("nogo", 10, "medium", "S flow aloft — rotor", wind("d
     [("No S flow aloft", "fail", "SSW 19 kt at 9,000 ft")], "Classic Cherry rotor setup.", warnings=[SOUTH_ROTOR(19)])
 
 spots = [
-    {"id": S, "name": "POM South", "lat": 40.4567, "lon": -111.9027, "face": "S", "flyable_arc_deg": [160, 200], "elevation_ft": 5148,
+    {"id": S, "name": "POM South", "lat": 40.4567, "lon": -111.9027, "face_deg": 150, "flyable_arc_deg": [160, 200], "elevation_ft": 5148,
      "links": [{"label": "UHGPGA site guide", "url": "https://www.uhgpga.org/pom-south-side"}], "cells": cells[S]},
-    {"id": N, "name": "POM North", "lat": 40.4745, "lon": -111.8928, "face": "N", "flyable_arc_deg": [270, 360], "elevation_ft": 5100,
+    {"id": N, "name": "POM North", "lat": 40.4745, "lon": -111.8928, "face_deg": 330, "flyable_arc_deg": [270, 360], "elevation_ft": 5100,
      "links": [{"label": "UHGPGA site guide", "url": "https://www.uhgpga.org/pom-north-side"}], "cells": cells[N]},
-    {"id": C, "name": "Cherry", "lat": 40.5153, "lon": -111.8270, "face": "NNW", "flyable_arc_deg": [320, 20], "elevation_ft": 7200, "links": [], "cells": cells[C]},
+    {"id": C, "name": "Cherry", "lat": 40.5153, "lon": -111.8270, "face_deg": 305, "flyable_arc_deg": [320, 20], "elevation_ft": 7200, "links": [], "cells": cells[C]},
 ]
 
 report = {

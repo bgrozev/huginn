@@ -51,7 +51,7 @@ Calm is green: there is no minimum.
   yellow = OK (pass, note it), orange = marginal (warn), red = at the limit (fail, no-go). Outside
   every band = not flyable.
 - Otherwise compare with the spot's `flyable_arc_deg`: on-face, cross, or tail. Outside the arc → at
-  best marginal; check the spot for direction-specific rotor hazards (e.g. east-wind rotors at POM
+  best marginal; check the spot for direction-specific rotor hazards (e.g. rotor below 160° at POM
   South) before rating.
 - **Lee side.** Wind from behind the launch (roughly opposite its face) puts the launch in the lee of
   its own ridge — that *is* a rotor hazard. The rotor check then fails with "Lee side: wind from

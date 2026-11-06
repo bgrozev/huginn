@@ -194,7 +194,6 @@
      "name": "POM South",
      "lat": 40.4567,
      "lon": -111.9027,
-     "face": "S",
      "flyable_arc_deg": [
       155,
       215
@@ -852,14 +851,14 @@
         }
        ]
       }
-     }
+     },
+     "face_deg": 150
     },
     {
      "id": "pom-north",
      "name": "POM North",
      "lat": 40.4745,
      "lon": -111.8928,
-     "face": "N",
      "flyable_arc_deg": [
       280,
       40
@@ -1484,14 +1483,14 @@
         }
        ]
       }
-     }
+     },
+     "face_deg": 330
     },
     {
      "id": "cherry",
      "name": "Cherry",
      "lat": 40.5153,
      "lon": -111.827,
-     "face": "NNW",
      "flyable_arc_deg": [
       290,
       10
@@ -2076,7 +2075,8 @@
         }
        ]
       }
-     }
+     },
+     "face_deg": 305
     }
    ]
   }

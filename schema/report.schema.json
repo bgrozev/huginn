@@ -103,7 +103,7 @@
         "id": { "type": "string", "pattern": "^[\\w-]+$" },
         "name": { "type": "string" },
         "lat": { "type": "number" }, "lon": { "type": "number" },
-        "face": { "type": "string", "description": "Direction the launch faces, e.g. NNW." },
+        "face_deg": { "type": "number", "minimum": 0, "maximum": 360, "description": "Direction the launch faces, degrees." },
         "flyable_arc_deg": {
           "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 360 }, "minItems": 2, "maxItems": 2,
           "description": "Flyable wind directions [from, to], clockwise. May wrap through north, e.g. [320, 20]."
