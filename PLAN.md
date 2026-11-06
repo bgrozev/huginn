@@ -53,14 +53,14 @@ Option A (recommended): `anthropics/claude-code-action` in headless mode with a 
 (`agent/prompt.md`), tools restricted to Read/Write + WebFetch on an allowlist of weather domains.
 Option B: Python + Claude Agent SDK. Start with A — least code; move to B if we need tighter control.
 
-Secret: `ANTHROPIC_API_KEY` in repo secrets. Model: latest Opus.
+Secret: `CLAUDE_CODE_OAUTH_TOKEN` (Claude subscription) in repo secrets. Model: latest Opus.
 
 ### Schedule
 
-Mountain Time, cron in UTC (shift with DST — accept ±1h drift or run hourly and gate in script):
-- ~05:00 local — morning run: Today AM uses dawn obs; plan the morning window.
-- ~13:00 local — afternoon run: Today PM uses midday obs; checks the diurnal switch.
-Plus `workflow_dispatch` for manual runs.
+Once a day at 14:00 Utah time: today's afternoon uses midday observations and shows whether the
+diurnal switch happened; the next days' mornings are ready the evening before. Cron is UTC without
+DST, so 20:00 and 21:00 UTC are both scheduled and a gate job keeps the one that is 14:00 in
+America/Denver. Plus `workflow_dispatch` for manual runs.
 
 ## Repo layout
 

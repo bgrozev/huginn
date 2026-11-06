@@ -15,8 +15,8 @@ and source links behind every call. Published at **https://huginn.mustelinae.net
 
 ## How a report is made
 
-[.github/workflows/report.yml](.github/workflows/report.yml) runs daily at 12:00 UTC (05:00 MST /
-06:00 MDT) and on demand (Actions → Daily report → Run workflow):
+[.github/workflows/report.yml](.github/workflows/report.yml) runs daily at 14:00 Utah time (all
+year, DST included) and on demand (Actions → Daily report → Run workflow):
 
 1. `scripts/fetch.py` downloads forecasts and observations → `raw/<run-id>.json` (kept 90 days as a
    run artifact, not committed).

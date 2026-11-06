@@ -2,8 +2,10 @@ name: Daily report
 
 on:
   schedule:
-    # GitHub cron is UTC: 05:00 MST (winter) / 06:00 MDT (summer).
-    - cron: "0 12 * * *"
+    # 14:00 Utah time. GitHub cron is UTC and ignores DST, so both hours are scheduled and the
+    # gate job keeps the one that is 14:00 in America/Denver: 21:00 UTC in MST, 20:00 UTC in MDT.
+    - cron: "0 21 * * *"
+    - cron: "0 20 * * *"
   workflow_dispatch:
 
 permissions:
@@ -17,7 +19,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.check.outputs.go }}
+    steps:
+      - id: check
+        # Decided by which schedule fired, not the clock: scheduled runs can start late.
+        run: |
+          offset=$(TZ=America/Denver date +%z)
+          case "${{ github.event_name }}/${{ github.event.schedule }}/$offset" in
+            schedule/"0 21 * * *"/-0700|schedule/"0 20 * * *"/-0600|workflow_dispatch/*) go=true ;;
+            *) go=false ;;
+          esac
+          echo "go=$go" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} schedule='${{ github.event.schedule }}' offset=$offset go=$go"
+
   report:
+    needs: gate
+    if: needs.gate.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
