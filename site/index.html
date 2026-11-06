@@ -8,12 +8,17 @@
 <link rel="icon" href="assets/raven.svg" type="image/svg+xml">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="assets/huginn.css">
+<script>
+  // Apply a saved theme before first paint; without one, the CSS follows the system setting.
+  try { const t = localStorage.getItem('huginn-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 </head>
 <body>
 <header class="topbar">
   <a class="brand" href="./"><img src="assets/raven.svg" alt="" width="22" height="22">Huginn</a>
   <span class="activity" id="activity">Speedflying</span>
   <a class="toplink" href="#history" id="history-link">History</a>
+  <button type="button" class="theme-btn" id="theme-btn" aria-label="Switch theme"></button>
 </header>
 
 <main id="app" class="container">

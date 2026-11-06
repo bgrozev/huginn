@@ -18,7 +18,8 @@ observation_stations:
   - { id: KSVR, name: South Valley Regional, url: "https://www.weather.gov/wrh/timeseries?site=KSVR&hours=72" }
   - { id: KSLC, name: Salt Lake Intl, url: "https://www.weather.gov/wrh/timeseries?site=KSLC&hours=72" }
   - { id: KPVU, name: Provo, url: "https://www.weather.gov/wrh/timeseries?site=KPVU&hours=72" }
-observations_map: "https://www.weather.gov/wrh/hazards?obs=true&wfo=slc"
+observations_map: "https://www.weather.gov/wrh/hazards?obs=true&wfo=slc&center=40.48,-111.87&zoom=11"
+windy_url: "https://www.windy.com/?40.480,-111.870,11"
 afd_url: "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
 ---
 
@@ -33,22 +34,29 @@ Cold air drains south-to-north toward the Great Salt Lake each morning (drainage
 heating reverses this to a north-to-south return flow in the afternoon/evening. The switchover
 point moves geographically through the day.
 
-- **Morning**: south wind → loads **POM South** (and Cherry, if flow suits its face).
+- **Morning**: south wind → loads **POM South**.
 - **Afternoon/evening**: north wind → loads **POM North**.
 - **Timing of the switch** depends on gradient strength. Light gradient (ridge): switch earlier and
   more complete. Strong gradient: diurnal pattern suppressed or delayed.
 
 **Flag if the forecast diverges from this pattern.** Pilots plan their day around this cycle.
 
+## Mixing down here
+
+The valley floor is ~4,500 ft. Watch winds aloft at **6,000 and 9,000 ft**: light valley wind under
+**20+ kt** at those levels means the calm ends when the boundary layer deepens, typically **late
+morning (~10:00)**. With a strong S gradient this is what closes the POM South morning slot.
+
+## Fronts here
+
+Post-frontal flow in the Intermountain West is usually strong, gusty **NW** for a day or so after a
+cold front — directly the Steep Mountain rotor trigger for POM North.
+
 ## Reading the stations
 
 - South-valley station reports south flow → POM South likely active.
 - KSLC reports N/NW but the south-valley station still reports S → transition zone at or near POM.
 - Both report the same direction → gradient has overridden the diurnal pattern.
-
-The v1 notes call the south-valley indicator "KSVR (Spanish Fork)". KSVR is South Valley Regional
-(West Jordan, north of POM); Spanish Fork is south (FPS). **Verify which station is the intended
-south-flow indicator.**
 
 **E7701** (Point of the Mountain) is the most direct launch-area reference when it reports.
 **FPS** (Spanish Fork) is the best indicator for south valley flow / POM South conditions.

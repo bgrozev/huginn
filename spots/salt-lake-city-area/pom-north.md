@@ -8,8 +8,6 @@ landing: { elevation_ft: 4700, approximate: true }
 faces: N
 flyable_arc_deg: [270, 360]
 limits:
-  # From v1 notes: "P2/M1 ideal: 10–14 kt; max 16 kt; gust tolerance +4 kt" — paragliding numbers.
-  # TODO: speedflying max for this launch. Until set, treat > 16 kt + gusts as marginal.
   speedflying: { max_kt: null }
   paragliding: { max_kt: 16, ideal_kt: [10, 14], gust_tolerance_kt: 4, note: "P2/M1" }
 best_time: pm
@@ -33,10 +31,6 @@ flow.
 - **Easterly crosswind** — ground turbulence in the lee of the launch fingers.
 - **Wind gradient on descent** — brisk over the bench → calm near the ground. Normal for a
   speedflying descent; expect it.
-- *(low relevance for speedflying)* Quarry venturi — west edge of lower bench. A fast direct glide to
-  the LZ avoids the drift.
-- *(PG only)* Benching-up — winds aloft stronger than at launch; brisk + buoyant on the lower bench =
-  rotor signal.
 
 ## Field warnings
 
@@ -44,5 +38,3 @@ flow.
   rotor from Steep Mountain).
 - **Abort trigger:** windsock cycling calm → strong more than once in 5 min = mechanical turbulence.
   Do not launch.
-- *(PG only)* Quarry venturi: drift toward west bench edge → break off immediately.
-- *(PG only)* Benching-up abort: cannot penetrate at transition → fly west toward the freeway.

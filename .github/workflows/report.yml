@@ -1,0 +1,100 @@
+name: Daily report
+
+on:
+  schedule:
+    # GitHub cron is UTC: 05:00 MST (winter) / 06:00 MDT (summer).
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit the report
+  pages: write      # deploy the site
+  id-token: write   # Pages deployment
+  issues: write     # open an issue when a run fails
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Fetch weather data
+        id: fetch
+        run: |
+          raw=$(python3 scripts/fetch.py)
+          run_id=$(basename "$raw" .json)
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "Run $run_id"
+
+      - name: Assess (Claude)
+        uses: anthropics/claude-code-action@d535f5172dec02b204866b393d6b20b9b2aaf98d # v1.0.266
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: >-
+            Follow agent/prompt.md exactly.
+            RUN_ID=${{ steps.fetch.outputs.run_id }}
+            RAW=raw/${{ steps.fetch.outputs.run_id }}.json
+            trigger=${{ github.event_name == 'schedule' && 'schedule' || 'manual' }}
+          claude_args: >-
+            --model claude-opus-5-5
+            --max-turns 60
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(python3 scripts/validate.py:*)"
+
+      - name: Validate
+        run: python3 scripts/validate.py "site/reports/${{ steps.fetch.outputs.run_id }}.json" --raw "raw/${{ steps.fetch.outputs.run_id }}.json"
+
+      - name: Publish
+        run: python3 scripts/publish.py "site/reports/${{ steps.fetch.outputs.run_id }}.json" --commit "$GITHUB_SHA"
+
+      - name: Commit report
+        run: |
+          git config user.name "huginn-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/reports
+          git commit -m "Report ${{ steps.fetch.outputs.run_id }}"
+          git push
+
+      - name: Keep raw data
+        if: always() && steps.fetch.outputs.run_id
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: raw-${{ steps.fetch.outputs.run_id }}
+          path: raw/
+          retention-days: 90
+
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -R site/. _site/
+          cp -R schema _site/schema
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+
+      - name: Open an issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Report run failed: ${{ steps.fetch.outputs.run_id || github.run_id }}" \
+            --body "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

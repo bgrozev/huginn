@@ -4,10 +4,10 @@
   'use strict';
 
   const STALE_HOURS = 14;
+  const SHOW_MAP = false; // hidden for now; set true to bring the map back
   const RATING_LABEL = { go: 'Go', marginal: 'Marginal', nogo: 'No-go', unknown: '?' };
   const RATING_COLOR = { go: '#16a34a', marginal: '#d97706', nogo: '#dc2626', unknown: '#94a3b8' };
   const CHECK_LABEL = { pass: 'Pass', warn: 'Warn', fail: 'Fail', na: 'N/A' };
-  const COMPASS = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
 
   const app = document.getElementById('app');
   const dialog = document.getElementById('detail');
@@ -21,21 +21,46 @@
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const safeUrl = (u) => (/^https?:\/\//i.test(u || '') ? esc(u) : '#');
   const rating = (r) => (r in RATING_LABEL ? r : 'unknown');
-  const compass = (deg) => (deg == null ? '' : COMPASS[Math.round(deg / 22.5) % 16]);
+  const isPast = (slot) => !!slot.ends_at && new Date(slot.ends_at).getTime() < Date.now();
+
+  function spotSubtitle(spot) {
+    const a = spot.flyable_arc_deg;
+    const arc = a ? `wind ${a[0]}°–${a[1]}°` : '';
+    return [spot.face ? `${spot.face}-facing` : '', arc].filter(Boolean).join(' · ');
+  }
 
   function speed(s) {
     if (s == null) return '';
     return Array.isArray(s) ? (s[0] === s[1] ? `${s[0]}` : `${s[0]}–${s[1]}`) : `${s}`;
   }
+  const maxOf = (s) => (s == null ? null : Array.isArray(s) ? Math.max(...s) : s);
+  const CALM_KT = 3;
+  const WINDY_KT = 15;
+  const isCalm = (w) => maxOf(w.speed_kt) != null && maxOf(w.speed_kt) <= CALM_KT && (maxOf(w.gust_kt) ?? 0) <= CALM_KT;
+
+  // Arrow points the way the wind blows (downwind), like a streamline on a wind map.
+  function arrow(dirDeg) {
+    if (dirDeg == null) return '';
+    return `<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true" style="transform:rotate(${(dirDeg + 180) % 360}deg)">
+      <path d="M8 1.5 13 8h-3.2v6.5H6.2V8H3z" fill="currentColor"/></svg>`;
+  }
+  // Full wind: arrow, degrees (from), speed, gust. No compass letters — the degrees say it.
   function windText(w) {
     if (!w) return '—';
     if (w.text) return esc(w.text);
     if (w.dir_deg == null && w.speed_kt == null) return '—';
-    const arrow = w.dir_deg != null
-      ? `<span class="arrow" style="transform:rotate(${(w.dir_deg + 180) % 360}deg)" title="from ${w.dir_deg}°">↑</span> ` : '';
-    const dir = w.dir_deg != null ? `${compass(w.dir_deg)} ${w.dir_deg}° ` : '';
+    if (isCalm(w)) return 'calm';
+    const dir = w.dir_deg != null ? `${w.dir_deg}° ` : '';
     const gust = w.gust_kt != null ? ` G${speed(w.gust_kt)}` : '';
-    return `${arrow}${dir}${speed(w.speed_kt)} kt${gust}`;
+    return `<span class="wind" title="${w.dir_deg != null ? `from ${w.dir_deg}°` : ''}">${arrow(w.dir_deg)} ${dir}${speed(w.speed_kt)} kt${gust}</span>`;
+  }
+  // Compact wind for table cells: arrow + speed range (+ gust), units in the legend.
+  function windShort(w) {
+    if (!w || (w.dir_deg == null && w.speed_kt == null)) return '';
+    if (isCalm(w)) return '<span class="wind calm">calm</span>';
+    const top = Math.max(maxOf(w.speed_kt) ?? 0, maxOf(w.gust_kt) ?? 0);
+    const gust = w.gust_kt != null ? ` G${speed(w.gust_kt)}` : '';
+    return `<span class="wind${top >= WINDY_KT ? ' windy' : ''}">${arrow(w.dir_deg)}${speed(w.speed_kt)}${gust}</span>`;
   }
   function links(list) {
     if (!list || !list.length) return '';
@@ -110,24 +135,26 @@
       !r._archived && hours > STALE_HOURS ? `<div class="banner stale">This report is ${Math.round(hours)} h old. Conditions have changed — do not rely on it.</div>` : '',
     ].join('');
 
+    // Group selector only once there is more than one group.
     const tabs = r.groups.length > 1
       ? `<div class="tabs" role="tablist">${r.groups.map((g, i) => `<button class="tab" role="tab" aria-selected="${i === groupIdx}" data-group="${i}">${esc(g.name)}</button>`).join('')}</div>`
-      : `<div class="tabs"><span class="tab" aria-selected="true">${esc(group.name)}</span></div>`;
+      : '';
 
     app.innerHTML = `
       <div class="meta">
+        <span class="label">Report generated</span>
         <span class="when">${esc(when)}</span>
-        <span class="ago">generated ${esc(ago(r.generated_at))}</span>
+        <span class="ago">${esc(ago(r.generated_at))}</span>
       </div>
       ${banners}
       ${tabs}
-      <div id="map" aria-label="Map of spots"></div>
       ${renderGrid(group)}
+      ${SHOW_MAP ? '<div id="map" aria-label="Map of spots"></div>' : ''}
       ${renderSynoptic(group)}
       ${renderObs(group)}
       ${renderSources(r)}
       <section class="card history" id="history">
-        <div class="section-title">History</div>
+        <h2 class="card-title">History</h2>
         <ul><li class="muted">Loading…</li></ul>
       </section>`;
 
@@ -138,35 +165,52 @@
       render(); loadHistory();
     }));
     app.querySelectorAll('.cell').forEach((c) => c.addEventListener('click', () => openDetail(c.dataset.spot, c.dataset.slot)));
-    renderMap(group);
+    if (SHOW_MAP) renderMap(group);
   }
 
   function renderGrid(group) {
     const slots = report.slots;
-    const tz = report.timezone;
-    const head = slots.map((s, i) => {
-      const day = s.label ? s.label.split(' ')[0] : fmtLocal(s.date + 'T12:00:00Z', tz, { weekday: 'short' });
-      return `<th class="${i === 0 ? 'now' : ''}" scope="col"><span class="day">${esc(day)}</span>${esc(s.part === 'am' ? 'AM' : 'PM')}${s.basis === 'forecast+obs' ? ' ●' : ''}</th>`;
-    }).join('');
+    // Columns are grouped by day: one day header spanning its AM/PM, a divider before each day.
+    const days = [];
+    slots.forEach((s) => {
+      const last = days[days.length - 1];
+      if (last && last.date === s.date) last.slots.push(s); else days.push({ date: s.date, slots: [s] });
+    });
+    const dayStart = new Set(days.map((d) => d.slots[0].id));
+    const colClass = (s) => [dayStart.has(s.id) ? 'day-start' : '', isPast(s) ? 'past' : ''].join(' ').trim();
+    // Noon UTC keeps the calendar date stable in any US time zone.
+    const dateOf = (d, opts) => fmtLocal(`${d}T12:00:00Z`, 'UTC', opts);
+
+    // Header tooltips are CSS (data-tip), not title=: native tooltips are slow and absent on touch.
+    const dayRow = days.map((d) => `<th class="day-start" colspan="${d.slots.length}" scope="colgroup">
+        <span class="tip" tabindex="0" data-tip="${esc(dateOf(d.date, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }))}">
+        ${esc(dateOf(d.date, { weekday: 'short' }))} <span class="date">${esc(dateOf(d.date, { month: 'short', day: 'numeric' }))}</span></span></th>`).join('');
+    const partRow = slots.map((s) => `<th class="part ${colClass(s)}" scope="col">
+        <span class="tip" tabindex="0" data-tip="${s.part === 'am' ? 'Morning' : 'Afternoon/evening'} · ${s.basis === 'forecast+obs' ? 'forecast + current observations' : 'forecast only'}${isPast(s) ? ' · already over' : ''}">
+        ${esc(s.part === 'am' ? 'AM' : 'PM')}${s.basis === 'forecast+obs' ? ' ●' : ''}</span></th>`).join('');
+
     const rows = group.spots.map((spot) => {
       const cells = slots.map((s) => {
         const c = (spot.cells || {})[s.id];
-        if (!c) return '<td><span class="cell r-unknown"><span class="pct">–</span></span></td>';
+        if (!c) return `<td class="${colClass(s)}"><span class="cell r-unknown"><span class="pct">–</span></span></td>`;
         const rt = rating(c.rating);
         const nWarn = (c.warnings || []).filter((w) => w.severity !== 'info').length;
         const abort = (c.warnings || []).some((w) => w.severity === 'abort');
-        return `<td><button class="cell r-${rt}" data-spot="${esc(spot.id)}" data-slot="${esc(s.id)}"
+        return `<td class="${colClass(s)}"><button class="cell r-${rt}" data-spot="${esc(spot.id)}" data-slot="${esc(s.id)}"
             aria-label="${esc(spot.name)} ${esc(s.label)}: ${esc(RATING_LABEL[rt])}, ${c.chance ?? '?'} percent">
           <span class="pct">${c.chance != null ? esc(c.chance) + '%' : '?'}</span>
           <span class="lbl">${esc(RATING_LABEL[rt])}</span>
-          <span class="warn-dot">${abort ? '⛔' : nWarn ? '⚠' : ''}</span>
+          <span class="cell-foot">${abort ? '⛔' : nWarn ? '⚠' : ''}${windShort((c.wind || {}).launch)}</span>
         </button></td>`;
       }).join('');
-      return `<tr id="row-${esc(spot.id)}"><th class="spot" scope="row">${esc(spot.name)}<span class="faces">${esc(spot.faces || '')}</span></th>${cells}</tr>`;
+      return `<tr id="row-${esc(spot.id)}"><th class="spot" scope="row">${esc(spot.name)}<span class="faces">${esc(spotSubtitle(spot))}</span></th>${cells}</tr>`;
     }).join('');
     return `
       <div class="grid-wrap"><table class="grid">
-        <thead><tr><th class="spot" scope="col">Spot</th>${head}</tr></thead>
+        <thead>
+          <tr><th class="spot" scope="col" rowspan="2">Spot</th>${dayRow}</tr>
+          <tr>${partRow}</tr>
+        </thead>
         <tbody>${rows}</tbody>
       </table></div>
       <div class="legend">
@@ -174,8 +218,10 @@
         <span><i class="sw" style="background:${RATING_COLOR.marginal}"></i>Marginal</span>
         <span><i class="sw" style="background:${RATING_COLOR.nogo}"></i>No-go</span>
         <span>% = est. chance the spot's criteria are met</span>
-        <span>● = includes current obs</span>
+        <span>● = includes current observations</span>
+        <span>Faded = already over</span>
         <span>⚠ warnings · ⛔ abort trigger</span>
+        <span>${arrow(180)} wind at launch, kt — arrow points where it blows (this one: from the south)</span>
       </div>`;
   }
 
@@ -184,7 +230,7 @@
     if (!s) return '';
     const p = s.pressure;
     return `<section class="card">
-      <div class="section-title">Big picture</div>
+      <h2 class="card-title">Big picture</h2>
       ${p ? `<p><span class="pressure">${esc((p.system || '').toUpperCase())}${p.value_mb ? ' · ' + esc(p.value_mb) + ' mb' : ''}${p.trend ? ' · ' + esc(p.trend) : ''}</span>${esc(p.significance || '')}</p>` : ''}
       <p>${esc(s.summary)}</p>
       ${s.afd_excerpt ? `<blockquote>“${esc(s.afd_excerpt)}” <br><small>— NWS Area Forecast Discussion</small></blockquote>` : ''}
@@ -197,19 +243,21 @@
     if (!o) return '';
     const tz = report.timezone;
     return `<section class="card">
-      <div class="section-title">Current observations${o.as_of ? ' · ' + esc(fmtLocal(o.as_of, tz, { hour: 'numeric', minute: '2-digit' })) : ''}</div>
+      <h2 class="card-title">Current observations${o.as_of ? ` <span class="muted">${esc(fmtLocal(o.as_of, tz, { hour: 'numeric', minute: '2-digit' }))}</span>` : ''}</h2>
       ${o.summary ? `<p>${esc(o.summary)}</p>` : ''}
       <div class="chips">${(o.stations || []).map((st) => `
-        <a class="chip" href="${safeUrl(st.url)}" target="_blank" rel="noopener"><b>${esc(st.id)} · ${esc(st.name)}</b><span>${esc(st.summary || 'view chart ↗')}</span></a>`).join('')}
+        <a class="chip" href="${safeUrl(st.url)}" target="_blank" rel="noopener"><b>${esc(st.id)} · ${esc(st.name)}</b><span>${st.wind ? windText(st.wind) : ''}${st.wind && st.summary ? ' · ' : ''}${esc(st.summary || (st.wind ? '' : 'view chart ↗'))}</span></a>`).join('')}
       </div>
-      ${o.map_url ? links([{ label: 'Observations map', url: o.map_url }]) : ''}
+      ${links(o.links)}
     </section>`;
   }
 
   function renderSources(r) {
     if (!r.sources || !r.sources.length) return '';
     return `<details class="card">
-      <summary class="section-title" style="cursor:pointer">Data sources (${r.sources.length})</summary>
+      <summary class="card-title" style="cursor:pointer">Data fetched for this report (${r.sources.length})</summary>
+      <p class="muted">Everything the agent downloaded for this run — forecasts, winds aloft, airport forecasts and
+      station observations — and whether each fetch worked.</p>
       <ul class="checks">${r.sources.map((s) => `
         <li><span class="res ${s.ok === false ? 'res-fail' : 'res-pass'}">${s.ok === false ? 'Fail' : 'OK'}</span>
         <span><a href="${safeUrl(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>
@@ -260,7 +308,7 @@
     dialogBody.innerHTML = `
       <div class="detail-head">
         <div><h2 id="detail-title">${esc(spot.name)} · ${esc(slot.label)}</h2>
-          <div class="sub">${esc(spot.faces || '')}${spot.elevation_ft ? ' · launch ' + esc(spot.elevation_ft) + ' ft' : ''} · ${slot.basis === 'forecast+obs' ? 'forecast + current obs' : 'forecast only'}</div></div>
+          <div class="sub">${esc(spotSubtitle(spot))}${spot.elevation_ft ? ' · launch ' + esc(spot.elevation_ft) + ' ft' : ''} · ${slot.basis === 'forecast+obs' ? 'forecast + current obs' : 'forecast only'}</div></div>
         <button class="close" type="button" aria-label="Close">×</button>
       </div>
       <div class="verdict r-${rt}">
@@ -307,6 +355,27 @@
   });
   dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
   window.addEventListener('hashchange', openFromHash);
+
+  // ---------- theme toggle ----------
+  const themeBtn = document.getElementById('theme-btn');
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const currentTheme = () => document.documentElement.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+  function syncThemeBtn() {
+    if (!themeBtn) return;
+    const dark = currentTheme() === 'dark';
+    themeBtn.textContent = dark ? '☀' : '☾';
+    themeBtn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    themeBtn.title = themeBtn.getAttribute('aria-label');
+  }
+  // Guarded: a cached older index.html may not have the button.
+  if (themeBtn) themeBtn.addEventListener('click', () => {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('huginn-theme', next); } catch (e) { /* storage blocked */ }
+    syncThemeBtn();
+  });
+  systemDark.addEventListener('change', syncThemeBtn);
+  syncThemeBtn();
 
   // ---------- first-visit acknowledgement ----------
   const ack = document.getElementById('ack');

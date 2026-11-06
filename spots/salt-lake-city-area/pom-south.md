@@ -8,9 +8,7 @@ landing: { lat: 40.4567, lon: -111.9027, elevation_ft: 4834, approximate: true }
 faces: S
 flyable_arc_deg: [160, 200]
 limits:
-  # From v1 notes: "Speed/mini ideal: 14–17 kt; max 22 kt; P2 max 13 kt".
-  # Speedflying has no minimum — calm is fine. Max applies to launch wind incl. gusts.
-  speedflying: { max_kt: 22, ideal_kt: [14, 17] }
+  speedflying: { max_kt: 22, ideal_kt: [0, 17] }
   paragliding: { max_kt: 13, note: "P2 max" }
 best_time: am
 best_time_note: First 2–3 h after sunrise, before the diurnal switch.
@@ -32,17 +30,11 @@ the diurnal switch to north.
 - **West wind bowl rotor** — west-end bowl.
 - **Midday thermal turbulence** — rapid transition. Speedflying in thermals near terrain is
   hazardous; morning window closes when thermals start.
-- *(PG only)* Blow-back — stronger-than-expected wind carries pilots north toward power lines,
-  towers, quarry drop-offs. Speedflyers have sufficient penetration.
-- *(PG only)* Top-landing — approach angle critical; do not point nose north of the valley windmill.
 
 ## Field warnings
 
 - **Abort trigger:** wind increase before launch → do not launch. (Once airborne, a speedflyer is
   committed to landing — this is not an in-flight abort.)
-- *(PG only)* Backward drift toward hill → land at bottom LZ immediately. Power lines and quarry
-  directly behind.
-- *(PG only)* Hang gliders soaring = PG limits exceeded. Reliable real-time signal.
 
 ## Notes from past reports
 

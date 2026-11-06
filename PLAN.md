@@ -66,7 +66,9 @@ Plus `workflow_dispatch` for manual runs.
 
 ```
 PLAN.md                     this file
-knowledge/speedflying.md    activity knowledge (general, site-independent)
+knowledge/weather.md        how the air works, data sources (any activity, any area)
+knowledge/speedflying.md    what the weather means for a speedflyer (ratings consequences)
+knowledge/reporting.md      ratings, chance %, warnings, wording
 spots/<group>/_group.md     group/area knowledge: WFO, diurnal pattern, obs stations
 spots/<group>/<spot>.md     YAML front matter (machine-readable) + local knowledge prose
 schema/report.schema.json   report contract between agent and site

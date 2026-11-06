@@ -43,7 +43,9 @@
         "date": { "type": "string", "format": "date" },
         "part": { "enum": ["am", "pm"] },
         "label": { "type": "string" },
-        "basis": { "enum": ["forecast", "forecast+obs"] }
+        "basis": { "enum": ["forecast", "forecast+obs"] },
+        "starts_at": { "type": "string", "format": "date-time", "description": "AM starts at sunrise, PM at 12:00 local." },
+        "ends_at": { "type": "string", "format": "date-time", "description": "When the slot is over; the site greys out past slots." }
       }
     },
     "speed": {
@@ -101,7 +103,11 @@
         "id": { "type": "string", "pattern": "^[\\w-]+$" },
         "name": { "type": "string" },
         "lat": { "type": "number" }, "lon": { "type": "number" },
-        "faces": { "type": "string" },
+        "face": { "type": "string", "description": "Direction the launch faces, e.g. NNW." },
+        "flyable_arc_deg": {
+          "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 360 }, "minItems": 2, "maxItems": 2,
+          "description": "Flyable wind directions [from, to], clockwise. May wrap through north, e.g. [320, 20]."
+        },
         "elevation_ft": { "type": "number" },
         "links": { "type": "array", "items": { "$ref": "#/$defs/link" } },
         "cells": { "type": "object", "additionalProperties": { "$ref": "#/$defs/cell" } }
@@ -138,10 +144,10 @@
               "type": "array",
               "items": {
                 "type": "object", "required": ["id", "name"],
-                "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "url": { "type": "string" }, "summary": { "type": "string" } }
+                "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "url": { "type": "string" }, "wind": { "$ref": "#/$defs/wind" }, "summary": { "type": "string", "description": "Optional note, e.g. trend. Wind goes in `wind`." } }
               }
             },
-            "map_url": { "type": "string" }
+            "links": { "type": "array", "items": { "$ref": "#/$defs/link" }, "description": "Live maps zoomed to the group (NWS obs map, Windy)." }
           }
         },
         "spots": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/spot" } }
