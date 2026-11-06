@@ -29,6 +29,15 @@
     return [spot.face ? `${spot.face}-facing` : '', arc].filter(Boolean).join(' · ');
   }
 
+  // Winds aloft are labeled above landing, so say how high the launch is above it.
+  function launchHeight(spot) {
+    if (spot.elevation_ft == null) return '';
+    const fmt = (n) => Math.round(n).toLocaleString('en-US');
+    if (spot.landing_elevation_ft == null) return ` · launch ${fmt(spot.elevation_ft)} ft`;
+    const above = Math.round((spot.elevation_ft - spot.landing_elevation_ft) / 10) * 10;
+    return ` · launch ${fmt(above)} ft above landing (${fmt(spot.elevation_ft)} ft)`;
+  }
+
   function speed(s) {
     if (s == null) return '';
     return Array.isArray(s) ? (s[0] === s[1] ? `${s[0]}` : `${s[0]}–${s[1]}`) : `${s}`;
@@ -308,7 +317,7 @@
     dialogBody.innerHTML = `
       <div class="detail-head">
         <div><h2 id="detail-title">${esc(spot.name)} · ${esc(slot.label)}</h2>
-          <div class="sub">${esc(spotSubtitle(spot))}${spot.elevation_ft ? ' · launch ' + esc(spot.elevation_ft) + ' ft' : ''} · ${slot.basis === 'forecast+obs' ? 'forecast + current obs' : 'forecast only'}</div></div>
+          <div class="sub">${esc(spotSubtitle(spot))}${launchHeight(spot)} ·${slot.basis === 'forecast+obs' ? 'forecast + current obs' : 'forecast only'}</div></div>
         <button class="close" type="button" aria-label="Close">×</button>
       </div>
       <div class="verdict r-${rt}">

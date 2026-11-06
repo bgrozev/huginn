@@ -30,11 +30,33 @@ None of these is "the main one" — check every slot against all of them.
 | Virga | Visible virga in the local area → **no-go**. Always list as an on-site check when there is mid-level moisture or convection. |
 | Thermal turbulence near terrain | Midday thermal transition is a reason to fly early or late, not a bonus → rate thermic slots marginal unless winds are very light. |
 
+## Wind speed bands
+
+Compare the **strongest wind expected at launch in the slot** — the higher of the top sustained speed
+and the top gust — with these bands. Spots may override them with
+`limits.speedflying.speed_bands_kt`.
+
+| Band | Wind at launch | Meaning |
+|---|---|---|
+| Green | ≤ 10 kt | Ideal |
+| Yellow | ≤ 15 kt | OK |
+| Orange | ≤ 20 kt | Marginal |
+| Red | > 20 kt | No-go |
+
+Calm is green: there is no minimum.
+
 ## Wind direction vs. launch
 
-- Compare forecast wind direction to the spot's flyable arc: on-face, cross, or tail.
-- Direction outside the arc → at best marginal; check the spot for direction-specific rotor
-  hazards (e.g. east-wind rotors at POM South) before rating.
+- When a spot has `wind_rose_deg`, place the forecast direction in its bands: green = ideal (pass),
+  yellow = OK (pass, note it), orange = marginal (warn), red = at the limit (fail, no-go). Outside
+  every band = not flyable.
+- Otherwise compare with the spot's `flyable_arc_deg`: on-face, cross, or tail. Outside the arc → at
+  best marginal; check the spot for direction-specific rotor hazards (e.g. east-wind rotors at POM
+  South) before rating.
+- **Lee side.** Wind from behind the launch (roughly opposite its face) puts the launch in the lee of
+  its own ridge — that *is* a rotor hazard. The rotor check then fails with "Lee side: wind from
+  behind the ridge puts the launch in rotor". The direction check stays factual ("tail wind,
+  350°"). Never mark the rotor check "not relevant".
 
 ## Gradient, mixing and timing
 

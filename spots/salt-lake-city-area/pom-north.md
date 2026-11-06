@@ -6,9 +6,15 @@ activities: [speedflying, paragliding]
 launch: { lat: 40.4745, lon: -111.8928, elevation_ft: 5100 }
 landing: { elevation_ft: 4700, approximate: true }
 faces: N
-flyable_arc_deg: [270, 360]
+# Flyable = green..orange (red is the limit). Bands from the pilot's wind rose for this launch.
+flyable_arc_deg: [280, 40]
+wind_rose_deg:
+  green: [[310, 10]]
+  yellow: [[290, 310], [10, 30]]
+  orange: [[280, 290], [30, 40]]
+  red: [[260, 280], [40, 50]]
 limits:
-  speedflying: { max_kt: null }
+  # speedflying: general speed bands from knowledge/speedflying.md
   paragliding: { max_kt: 16, ideal_kt: [10, 14], gust_tolerance_kt: 4, note: "P2/M1" }
 best_time: pm
 best_time_note: Afternoon/evening after the diurnal switch to north; smoothest ~2 h before sunset.

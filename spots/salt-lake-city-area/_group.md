@@ -41,7 +41,7 @@ point moves geographically through the day.
 
 ## Mixing down here
 
-The valley floor is ~4,500 ft. Watch winds aloft at **850 and 700 mb (~5,000 and ~10,000 ft)**: light valley wind under
+The valley floor is ~4,500 ft. Watch winds aloft **~2,000–5,500 ft above the POM landings**: light valley wind under
 **20+ kt** at those levels means the calm ends when the boundary layer deepens, typically **late
 morning (~10:00)**. With a strong S gradient this is what closes the POM South morning slot.
 
@@ -61,7 +61,7 @@ cold front — directly the Steep Mountain rotor trigger for POM North.
 
 ## Elevation correction
 
-Stations sit near valley elevation (~4,200–4,800 ft). Launches are 5,100–7,200 ft.
+Stations sit near valley elevation (~4,200–4,800 ft). Launches are 5,100–6,100 ft.
 **Add 3–8 kt to valley obs to estimate launch wind.** NWS timeseries pages show mph — convert to kt
 (÷ 1.151).
 

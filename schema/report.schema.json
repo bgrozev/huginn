@@ -108,7 +108,8 @@
           "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 360 }, "minItems": 2, "maxItems": 2,
           "description": "Flyable wind directions [from, to], clockwise. May wrap through north, e.g. [320, 20]."
         },
-        "elevation_ft": { "type": "number" },
+        "elevation_ft": { "type": "number", "description": "Launch elevation, ft MSL." },
+        "landing_elevation_ft": { "type": "number", "description": "Landing elevation, ft MSL; winds aloft are labeled relative to it." },
         "links": { "type": "array", "items": { "$ref": "#/$defs/link" } },
         "cells": { "type": "object", "additionalProperties": { "$ref": "#/$defs/cell" } }
       }

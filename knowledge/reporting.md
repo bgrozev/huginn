@@ -39,8 +39,11 @@ Each warning should teach, not just alarm — but stay short:
 ## Writing for the reader
 
 - **All wind speeds in knots (kt).** Never m/s or km/h in output.
+- Winds aloft are labeled by height above the spot's landing: "2,000 ft above landing" — one
+  reference for every launch on the hill. Not "AGL", not a pressure level (mb), not MSL.
 - Winds in structured fields are numbers (`dir_deg`, `speed_kt`, `gust_kt`); the site draws the
-  arrow. Don't add compass letters next to degrees ("160°", not "SSE 160°"). Prose can still say
+  arrow. Always fill those numbers (the most representative direction, the speed range) and never
+  use the `text` field — it replaces the arrow. Timing and shifts go in `explanation` or `checks`. Don't add compass letters next to degrees ("160°", not "SSE 160°"). Prose can still say
   "south drainage".
 - Name stations and products in plain words; put codes in parentheses only where useful:
   "Point of the Mountain station", "Salt Lake airport (KSLC)" — not "E7701", "KSLC".

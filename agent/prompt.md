@@ -24,9 +24,12 @@ Hazards tagged `(PG only)` or `(low relevance for speedflying)` are not used in 
   `label`, `basis`, `ends_at`; `starts_at` may be kept).
 - `sun` — sunrise/sunset per day, local time.
 - `afd` — the NWS forecast discussion text and issue time.
-- `winds_aloft.hourly` — GFS winds at the 850, 700 and 600 mb pressure levels over the area
-  centroid, local time: `alt_ft` (height of that level, MSL, ~5,000 / ~10,000 / ~14,000 ft),
-  `dir_deg`, `speed_kt`. Use the hours inside each slot for rotor triggers and mixing down.
+- `spots[].aloft` — GFS winds aloft (`winds_aloft_model`), hourly, local time, per spot: each
+  level has `above_landing_ft` (height above that spot's landing), `dir_deg`, `speed_kt`. The launch
+  is `meta.launch.elevation_ft − meta.landing.elevation_ft` above the landing. Use the hours inside
+  each slot for rotor triggers, mixing down and the wind on the descent. In the report, label aloft
+  winds by height above landing (`"level": "2,000 ft above landing"`), never by pressure level (mb),
+  MSL or "AGL".
 - `tafs` — airport forecast periods with wind in kt and UTC times.
 - `pressure` — sea-level pressure series (mb) at the reference airport, newest first.
 - `observations` — recent station observations, newest first, wind in kt. Check every timestamp:
@@ -48,8 +51,10 @@ Work through it the way a careful pilot would, and keep the reasoning for the re
    `ends_at`), winds aloft for the same hours, and TAFs:
    - Wind at launch: direction and speed range (and gust) over the useful part of the slot. Apply the
      area's elevation correction where you use valley data.
-   - Direction against the spot's `flyable_arc_deg`; speed and gust against its `limits.speedflying`.
-     A null max means no number is set — follow the spot text and speedflying.md.
+   - Direction and speed (gusts included) against the spot's limits.
+     Speed: the speed bands in speedflying.md, or the spot's `limits.speedflying.speed_bands_kt`.
+     Direction: the spot's `wind_rose_deg` bands when present, else `flyable_arc_deg`.
+     Wind from behind the launch = lee side: the rotor check fails (see speedflying.md).
    - Every hazard in speedflying.md and the spot's `rotor_triggers`.
    - The area's diurnal pattern from `_group.md`: which side works when, and whether the forecast
      follows or breaks it.
@@ -72,7 +77,8 @@ Write `site/reports/<RUN_ID>.json`:
 - `groups[]`: `id`, `name`, `synoptic`, `observations` (`as_of`, `summary`, `stations` with
   structured `wind` from the newest observation, `links` from `_group.md`: NWS observations map
   and Windy), `spots[]` with `id`, `name`, `lat`/`lon` (launch), `face`, `flyable_arc_deg`,
-  `elevation_ft`, `links` from the spot file, and `cells` keyed by every slot id.
+  `elevation_ft` (launch), `landing_elevation_ft`, `links` from the spot file, and `cells` keyed by
+  every slot id.
 - Each cell's `sources`: the links that support it (forecast discussion page, winds-aloft URL,
   TAF URL, …) — only URLs present in the raw data or the repo files.
 - `sources`: the raw `sources` list, unchanged.

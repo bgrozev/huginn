@@ -26,8 +26,10 @@ UA = "huginn/0.1 (https://github.com/bgrozev/huginn)"
 KMH_TO_KT = 1 / 1.852
 # Daylight-ish hours kept from the hourly grid forecast (local time).
 HOUR_FROM, HOUR_TO = 5, 21
-# Pressure levels for winds aloft (Open-Meteo, GFS): ~5,000 / ~10,000 / ~14,000 ft MSL.
-ALOFT_LEVELS_HPA = (850, 700, 600)
+# Pressure levels for winds aloft (Open-Meteo, GFS): ~5,000 / 6,700 / 8,400 / 10,000 / 14,000 ft MSL.
+ALOFT_LEVELS_HPA = (850, 800, 750, 700, 600)
+# Levels closer than this above the landing are dropped (at or below terrain).
+MIN_ABOVE_LANDING_FT = 300
 GRID_FIELDS = {
     # NWS grid name -> (output key, converter)
     "windDirection": ("dir_deg", lambda v: round(v)),
@@ -180,6 +182,21 @@ def aloft_hourly(data, tz, first_day, last_day):
     return rows
 
 
+def aloft_above_landing(rows, landing_ft):
+    """Winds aloft relative to a spot's landing — one reference for every launch on the hill, and it
+    covers the whole descent. Levels less than MIN_ABOVE_LANDING_FT above it are dropped."""
+    out = []
+    for r in rows:
+        levels = []
+        for name, lv in r["levels"].items():
+            if lv["alt_ft"] is None or lv["alt_ft"] - landing_ft < MIN_ABOVE_LANDING_FT:
+                continue
+            levels.append({"above_landing_ft": int(round(lv["alt_ft"] - landing_ft, -2)), "level": name,
+                           "dir_deg": lv["dir_deg"], "speed_kt": lv["speed_kt"]})
+        out.append({"time": r["time"], "levels": levels})
+    return out
+
+
 # ---------- observations ----------
 
 def slim_obs(features, limit=6):
@@ -230,7 +247,8 @@ def fetch_group(fx, group_dir, now):
 
     # Winds aloft (the aviationweather.gov FD tables were discontinued with the NAM in 2026)
     data = fx.get("Winds aloft forecast (Open-Meteo GFS)", aloft_url(c["lat"], c["lon"], g["timezone"]))
-    out["winds_aloft"] = {"model": "GFS via Open-Meteo", "hourly": aloft_hourly(data, tz, first_day, last_day) if data else []}
+    aloft = aloft_hourly(data, tz, first_day, last_day) if data else []
+    out["winds_aloft_model"] = "GFS via Open-Meteo, over the area centroid"
 
     # TAFs
     ids = ",".join(g["taf_airports"])
@@ -278,7 +296,8 @@ def fetch_group(fx, group_dir, now):
             grid = fx.get(f"NWS hourly forecast — {s['name']} launch", grid_url)
             if grid:
                 hourly = grid_hourly(grid, tz, first_day, last_day)
-        out["spots"].append({"id": sid, "name": s["name"], "meta": s, "grid_url": grid_url, "hourly": hourly})
+        out["spots"].append({"id": sid, "name": s["name"], "meta": s, "grid_url": grid_url, "hourly": hourly,
+                             "aloft": aloft_above_landing(aloft, (s.get("landing") or {}).get("elevation_ft") or la["elevation_ft"])})
     return out
 
 

@@ -6,9 +6,18 @@ activities: [speedflying, paragliding]
 launch: { lat: 40.4567, lon: -111.9027, elevation_ft: 5148 }
 landing: { lat: 40.4567, lon: -111.9027, elevation_ft: 4834, approximate: true }
 faces: S
-flyable_arc_deg: [160, 200]
+# Flyable = green..orange (red is the limit). Bands estimated from NED 10 m terrain (aspect ~147°,
+# ridge ~045/240°) by analogy with POM North's pilot wind rose, keeping the site guide's 160° east
+# cut-off for the SE rotor. Confidence medium — confirm how far past 200° is flyable.
+flyable_arc_deg: [155, 215]
+wind_rose_deg:
+  green: [[170, 195]]
+  yellow: [[160, 170], [195, 205]]
+  orange: [[155, 160], [205, 215]]
+  red: [[150, 155], [215, 225]]
 limits:
-  speedflying: { max_kt: 22, ideal_kt: [0, 17] }
+  # speedflying: general speed bands from knowledge/speedflying.md
+  # (v1 notes had "speed/mini wing ideal 14–17 kt, max 22 kt")
   paragliding: { max_kt: 13, note: "P2 max" }
 best_time: am
 best_time_note: First 2–3 h after sunrise, before the diurnal switch.
