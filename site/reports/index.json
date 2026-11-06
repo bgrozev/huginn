@@ -1,6 +1,11 @@
 {
  "reports": [
   {
+   "id": "2026-11-06T1722Z",
+   "generated_at": "2026-11-06T17:22:34Z",
+   "summary": "Go: POM North Fri PM, POM South Sat AM, POM North Sat PM"
+  },
+  {
    "id": "2026-11-06T1711Z",
    "generated_at": "2026-11-06T17:11:03Z",
    "summary": "Go: POM North Sat PM"
