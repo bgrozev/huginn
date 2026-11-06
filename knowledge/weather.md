@@ -90,8 +90,9 @@ gusty for a day or so; its direction depends on the region (see area files). Giv
 ## Units
 
 - Work in **knots**. km/h → kt: ÷ 1.852. mph → kt: ÷ 1.151.
-- Winds-aloft text forecast (FD) is already in kt. Format `DDSS`: DD = direction ×10°, SS = speed.
-  `2714` → 270°/14 kt. `9900` → light and variable. `7799` → missing.
+- Pressure levels ≈ altitude (MSL): 850 mb ~5,000 ft, 700 mb ~10,000 ft, 600 mb ~14,000 ft; the
+  data gives the actual height of each level.
+- The aviationweather.gov winds-aloft text tables (FD) were discontinued with the NAM model in 2026.
 
 ## Data sources
 
@@ -99,7 +100,7 @@ gusty for a day or so; its direction depends on the region (see area files). Giv
 |---|---|---|
 | NWS Area Forecast Discussion | Synoptic pattern, forecaster reasoning, confidence | `https://api.weather.gov/products?type=AFD&location={wfo}` |
 | NWS gridpoint forecast | Hourly wind at launch coordinates | `https://api.weather.gov/points/{lat},{lon}` → `forecastGridData` |
-| Winds aloft (FD) | Gradient & rotor triggers by level | `https://aviationweather.gov/api/data/windtemp?region={region}&level=low&fcst=06\|12\|24` |
+| Winds aloft (GFS via Open-Meteo) | Gradient, rotor triggers, mixing down — hourly at 850/700/600 mb | `https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=wind_speed_700hPa,wind_direction_700hPa,…&wind_speed_unit=kn` |
 | TAF | Hourly-ish wind incl. gusts at nearby airports | `https://aviationweather.gov/api/data/taf?ids={ids}&format=json` |
 | Station observations | Current wind for nearest slot | `https://api.weather.gov/stations/{id}/observations?limit=5` |
 | GFA | Graphical forecast, link only | `https://aviationweather.gov/gfa/` |
@@ -107,9 +108,6 @@ gusty for a day or so; its direction depends on the region (see area files). Giv
 | SPC outlook / mesoanalysis | Convective risk, link only | `https://www.spc.noaa.gov/products/outlook/` |
 | NWS observations map | Live station winds, link only | `https://www.weather.gov/wrh/hazards?obs=true&wfo={wfo}&center={lat},{lon}&zoom=11` (needs `wfo` or obs don't load) |
 | Windy | Model wind map, link only | `https://www.windy.com/?{lat},{lon},11` |
-
-Winds-aloft region codes: `slc` Intermountain West, `sfo` West Coast, `dfw` South Central,
-`chi` Midwest.
 
 NWS station timeseries pages (`weather.gov/wrh/timeseries?site=…`) are JavaScript-rendered — use
 them as chart links, fetch values from the API instead.

@@ -24,9 +24,9 @@ Hazards tagged `(PG only)` or `(low relevance for speedflying)` are not used in 
   `label`, `basis`, `ends_at`; `starts_at` may be kept).
 - `sun` — sunrise/sunset per day, local time.
 - `afd` — the NWS forecast discussion text and issue time.
-- `winds_aloft` — decoded FD forecasts (6/12/24 h) for the area's station, by altitude in feet:
-  `dir_deg`, `speed_kt`, `temp_c`; `light_variable: true` means calm/variable. `valid` is a UTC
-  day-hour like `031800Z` (3rd, 18:00 UTC).
+- `winds_aloft.hourly` — GFS winds at the 850, 700 and 600 mb pressure levels over the area
+  centroid, local time: `alt_ft` (height of that level, MSL, ~5,000 / ~10,000 / ~14,000 ft),
+  `dir_deg`, `speed_kt`. Use the hours inside each slot for rotor triggers and mixing down.
 - `tafs` — airport forecast periods with wind in kt and UTC times.
 - `pressure` — sea-level pressure series (mb) at the reference airport, newest first.
 - `observations` — recent station observations, newest first, wind in kt. Check every timestamp:
@@ -45,7 +45,7 @@ Work through it the way a careful pilot would, and keep the reasoning for the re
    trend, convective risk. Pick a 1–3 sentence excerpt from the discussion that matters most and
    quote it exactly in `afd_excerpt`.
 2. **Each spot × slot.** Use the hourly launch forecast within the slot window (`starts_at`–
-   `ends_at`), winds aloft nearest in time, and TAFs:
+   `ends_at`), winds aloft for the same hours, and TAFs:
    - Wind at launch: direction and speed range (and gust) over the useful part of the slot. Apply the
      area's elevation correction where you use valley data.
    - Direction against the spot's `flyable_arc_deg`; speed and gust against its `limits.speedflying`.

@@ -4,8 +4,6 @@ name: Salt Lake City Area
 centroid: { lat: 40.490, lon: -111.868 }
 timezone: America/Denver
 wfo: SLC
-winds_aloft_region: slc
-winds_aloft_station: SLC
 taf_airports: [KSLC, KPVU]
 pressure_reference: KSLC
 spots: [pom-south, pom-north, cherry]
@@ -43,7 +41,7 @@ point moves geographically through the day.
 
 ## Mixing down here
 
-The valley floor is ~4,500 ft. Watch winds aloft at **6,000 and 9,000 ft**: light valley wind under
+The valley floor is ~4,500 ft. Watch winds aloft at **850 and 700 mb (~5,000 and ~10,000 ft)**: light valley wind under
 **20+ kt** at those levels means the calm ends when the boundary layer deepens, typically **late
 morning (~10:00)**. With a strong S gradient this is what closes the POM South morning slot.
 

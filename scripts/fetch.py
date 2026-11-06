@@ -3,8 +3,8 @@
 Usage: python3 scripts/fetch.py [--out raw/] [--now 2026-11-02T12:00:00Z]
 
 Reads spots/<group>/_group.md and spots/<group>/<spot>.md front matter, then downloads:
-NWS forecast discussion, NWS gridpoint forecast at each launch, winds aloft (FD), TAFs,
-station observations. Writes raw/<run-id>.json and prints its path.
+NWS forecast discussion, NWS gridpoint forecast at each launch, winds aloft (Open-Meteo GFS
+pressure levels), TAFs, METAR pressure, station observations. Writes raw/<run-id>.json and prints its path.
 
 Everything is converted to knots. Every request is recorded in `sources` with ok/error,
 so a failed fetch is visible in the report instead of silently missing.
@@ -26,7 +26,8 @@ UA = "huginn/0.1 (https://github.com/bgrozev/huginn)"
 KMH_TO_KT = 1 / 1.852
 # Daylight-ish hours kept from the hourly grid forecast (local time).
 HOUR_FROM, HOUR_TO = 5, 21
-FD_HOURS = (6, 12, 24)
+# Pressure levels for winds aloft (Open-Meteo, GFS): ~5,000 / ~10,000 / ~14,000 ft MSL.
+ALOFT_LEVELS_HPA = (850, 700, 600)
 GRID_FIELDS = {
     # NWS grid name -> (output key, converter)
     "windDirection": ("dir_deg", lambda v: round(v)),
@@ -148,41 +149,35 @@ def grid_hourly(grid, tz, first_day, last_day):
     return [rows[t] for t in sorted(rows)]
 
 
-# ---------- winds aloft (FD text) ----------
+# ---------- winds aloft (Open-Meteo pressure levels) ----------
 
-def decode_fd(field, alt):
-    """'2714+05' -> {dir_deg, speed_kt, temp_c}; '9900' -> light and variable."""
-    if not field:
-        return None
-    dd, ss = int(field[0:2]), int(field[2:4])
-    out = {}
-    if field[:4] == "9900":
-        out.update(dir_deg=None, speed_kt=0, light_variable=True)
-    else:
-        if dd >= 51:
-            dd, ss = dd - 50, ss + 100
-        out.update(dir_deg=dd * 10 % 360 or 360, speed_kt=ss)
-    t = field[4:]
-    if t:
-        out["temp_c"] = int(t) if t[0] in "+-" else -int(t)
-    return out
+def aloft_url(lat, lon, tz_name):
+    fields = []
+    for p in ALOFT_LEVELS_HPA:
+        fields += [f"wind_speed_{p}hPa", f"wind_direction_{p}hPa", f"geopotential_height_{p}hPa"]
+    return (f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+            f"&hourly={','.join(fields)}&wind_speed_unit=kn&timezone={tz_name.replace('/', '%2F')}"
+            f"&forecast_days=5&models=gfs_seamless")
 
 
-def parse_fd(text, station):
-    header = next(l for l in text.splitlines() if l.startswith("FT "))
-    line = next((l for l in text.splitlines() if l.startswith(station + " ")), None)
-    valid = re.search(r"VALID (\d{6}Z)\s+FOR USE (\d{4}-\d{4}Z)", text)
-    levels = {}
-    for m in re.finditer(r"\d{4,5}", header):
-        alt = int(m.group())
-        width = 4 if alt == 3000 else 6 if alt >= 30000 else 7
-        if line is None:
+def aloft_hourly(data, tz, first_day, last_day):
+    """Hourly rows {time, levels: {'700mb': {alt_ft, dir_deg, speed_kt}}} within the slot days."""
+    h = data["hourly"]
+    rows = []
+    for i, t in enumerate(h["time"]):
+        lt = dt.datetime.fromisoformat(t).replace(tzinfo=tz)
+        if not (first_day <= lt.date() <= last_day and HOUR_FROM <= lt.hour <= HOUR_TO):
             continue
-        field = line[m.end() - width:m.end()].strip()
-        if field:
-            levels[f"{alt}"] = decode_fd(field, alt)
-    return {"valid": valid.group(1) if valid else None, "for_use": valid.group(2) if valid else None,
-            "station": station, "levels_ft": levels}
+        levels = {}
+        for p in ALOFT_LEVELS_HPA:
+            sp, d, z = (h.get(f"{k}_{p}hPa", [None] * len(h["time"]))[i]
+                        for k in ("wind_speed", "wind_direction", "geopotential_height"))
+            if sp is None:
+                continue
+            levels[f"{p}mb"] = {"alt_ft": None if z is None else int(round(z * 3.28084, -2)),
+                                "dir_deg": None if d is None else round(d), "speed_kt": round(sp)}
+        rows.append({"time": lt.isoformat(), "levels": levels})
+    return rows
 
 
 # ---------- observations ----------
@@ -233,15 +228,9 @@ def fetch_group(fx, group_dir, now):
             out["afd"] = {"issued": prod.get("issuanceTime"), "text": prod.get("productText"),
                           "page": g.get("afd_url")}
 
-    # Winds aloft
-    out["winds_aloft"] = []
-    for h in FD_HOURS:
-        url = f"https://aviationweather.gov/api/data/windtemp?region={g['winds_aloft_region']}&level=low&fcst={h:02d}"
-        text = fx.get(f"Winds aloft forecast ({h} h)", url, kind="text")
-        if text:
-            fd = parse_fd(text, g["winds_aloft_station"])
-            fd["forecast_hours"] = h
-            out["winds_aloft"].append(fd)
+    # Winds aloft (the aviationweather.gov FD tables were discontinued with the NAM in 2026)
+    data = fx.get("Winds aloft forecast (Open-Meteo GFS)", aloft_url(c["lat"], c["lon"], g["timezone"]))
+    out["winds_aloft"] = {"model": "GFS via Open-Meteo", "hourly": aloft_hourly(data, tz, first_day, last_day) if data else []}
 
     # TAFs
     ids = ",".join(g["taf_airports"])

@@ -45,6 +45,6 @@ Each warning should teach, not just alarm — but stay short:
 - Name stations and products in plain words; put codes in parentheses only where useful:
   "Point of the Mountain station", "Salt Lake airport (KSLC)" — not "E7701", "KSLC".
 - Link labels say what the page is: "NWS forecast discussion (Salt Lake City)", "Winds aloft
-  forecast (12 h)", "Airport forecasts — Salt Lake & Provo (TAF)", "Aviation forecast map (GFA)",
+  forecast (GFS)", "Airport forecasts — Salt Lake & Provo (TAF)", "Aviation forecast map (GFA)",
   "Fronts & pressure chart", "Thunderstorm outlook (SPC)" — not "AFD — SLC", "GFA".
 - When data is missing or ambiguous, say so rather than guessing.
