@@ -1,0 +1,2101 @@
+{
+ "schema_version": 1,
+ "id": "2026-11-12T0204Z",
+ "generated_at": "2026-11-12T02:04:18Z",
+ "timezone": "America/Denver",
+ "activity": "speedflying",
+ "run": {
+  "trigger": "schedule",
+  "model": "claude-opus-5-5",
+  "commit": "b87af9efd5bb30e8a250878ce32f7352b180aa23"
+ },
+ "slots": [
+  {
+   "id": "d2-am",
+   "date": "2026-11-12",
+   "part": "am",
+   "label": "Thu AM",
+   "basis": "forecast+obs",
+   "starts_at": "2026-11-12T14:09:33Z",
+   "ends_at": "2026-11-12T19:00:00Z"
+  },
+  {
+   "id": "d2-pm",
+   "date": "2026-11-12",
+   "part": "pm",
+   "label": "Thu PM",
+   "basis": "forecast",
+   "starts_at": "2026-11-12T19:00:00Z",
+   "ends_at": "2026-11-13T00:14:07Z"
+  },
+  {
+   "id": "d3-am",
+   "date": "2026-11-13",
+   "part": "am",
+   "label": "Fri AM",
+   "basis": "forecast",
+   "starts_at": "2026-11-13T14:10:45Z",
+   "ends_at": "2026-11-13T19:00:00Z"
+  },
+  {
+   "id": "d3-pm",
+   "date": "2026-11-13",
+   "part": "pm",
+   "label": "Fri PM",
+   "basis": "forecast",
+   "starts_at": "2026-11-13T19:00:00Z",
+   "ends_at": "2026-11-14T00:13:13Z"
+  },
+  {
+   "id": "d4-am",
+   "date": "2026-11-14",
+   "part": "am",
+   "label": "Sat AM",
+   "basis": "forecast",
+   "starts_at": "2026-11-14T14:11:57Z",
+   "ends_at": "2026-11-14T19:00:00Z"
+  },
+  {
+   "id": "d4-pm",
+   "date": "2026-11-14",
+   "part": "pm",
+   "label": "Sat PM",
+   "basis": "forecast",
+   "starts_at": "2026-11-14T19:00:00Z",
+   "ends_at": "2026-11-15T00:12:21Z"
+  }
+ ],
+ "groups": [
+  {
+   "id": "salt-lake-city-area",
+   "name": "Salt Lake City Area",
+   "synoptic": {
+    "summary": "A ridge holds through Friday with a deep, strengthening valley inversion and hazy air: light, terrain-driven wind on Thursday. Flow from ~150°–195° increases Friday ahead of a trough, but the inversion may keep the stronger wind aloft off the surface. The trough swings through Saturday (80% chance) with widespread valley rain from early morning, flow turning to ~300°–330° by Saturday afternoon and the coldest air of the season Saturday night. No thunderstorm risk is mentioned; the hourly forecast shows only 4–10% thunder on Friday evening and Saturday.",
+    "afd_excerpt": "Southerly flow will start to increase on Friday ahead of our weekend storm. Winds will be elevated across western Utah, but these strong winds might not manifest near the surface across the Wasatch Front which would limit mixing and allow inversions to hold on until precipitation and cooler air aloft arrive on Saturday.",
+    "pressure": {
+     "system": "ridge",
+     "value_mb": 1025.0,
+     "trend": "falling",
+     "significance": "Salt Lake airport (KSLC) sea-level pressure 1025.0 mb at 01:54Z, down from 1027.4 mb 23 h earlier (low point 1024.3 mb at 22:54Z). High pressure still dominates; the slow fall is the first sign of the weekend trough."
+    },
+    "links": [
+     {
+      "label": "NWS forecast discussion (Salt Lake City)",
+      "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+     },
+     {
+      "label": "Aviation forecast map (GFA)",
+      "url": "https://aviationweather.gov/gfa/"
+     },
+     {
+      "label": "Fronts & pressure chart",
+      "url": "https://aviationweather.gov/gfa/#progchart"
+     },
+     {
+      "label": "Thunderstorm outlook (SPC)",
+      "url": "https://www.spc.noaa.gov/products/outlook/"
+     }
+    ]
+   },
+   "observations": {
+    "as_of": "2026-11-12T01:30:00Z",
+    "summary": "Wednesday evening (18:15–18:30 local) observations, ~13 h before the Thursday morning slot. Light wind everywhere (0–6 kt). The Lehi station already shows the evening drainage at 131°–143° 4–10 kt; Salt Lake airport is still at 250°–280° 4–5 kt and South Valley Regional at 290° 4 kt, matching the airport forecast's switch to 150° after 03Z. The Point of the Mountain and Draper stations returned no data. Valley readings: add 3–8 kt for launch height.",
+    "stations": [
+     {
+      "id": "E7701",
+      "name": "Point of the Mountain",
+      "url": "https://www.weather.gov/wrh/timeseries?site=E7701&hours=72",
+      "summary": "No observations returned in this run."
+     },
+     {
+      "id": "FPS",
+      "name": "Spanish Fork",
+      "url": "https://www.weather.gov/wrh/timeseries?site=FPS&hours=72",
+      "wind": {
+       "dir_deg": 358,
+       "speed_kt": 3
+      },
+      "summary": "01:05Z. Shifting through 150°–360° at 1–4 kt over the last 25 min."
+     },
+     {
+      "id": "UT7",
+      "name": "Draper",
+      "url": "https://www.weather.gov/wrh/timeseries?site=UT7&hours=72",
+      "summary": "No observations returned in this run."
+     },
+     {
+      "id": "UTALP",
+      "name": "Alpine",
+      "url": "https://www.weather.gov/wrh/timeseries?site=UTALP&hours=72",
+      "wind": {
+       "dir_deg": 18,
+       "speed_kt": 3
+      },
+      "summary": "01:20Z. Was 115°–125° at 2–3 kt until 01:00Z."
+     },
+     {
+      "id": "F3671",
+      "name": "Lehi",
+      "url": "https://www.weather.gov/wrh/timeseries?site=F3671&hours=72",
+      "wind": {
+       "dir_deg": 131,
+       "speed_kt": 6
+      },
+      "summary": "01:30Z. Steady 131°–143°, 4–10 kt: evening drainage has started."
+     },
+     {
+      "id": "KSVR",
+      "name": "South Valley Regional",
+      "url": "https://www.weather.gov/wrh/timeseries?site=KSVR&hours=72",
+      "wind": {
+       "dir_deg": 290,
+       "speed_kt": 4
+      },
+      "summary": "01:15Z. Afternoon flow from 320°–350° at 5–6 kt is easing."
+     },
+     {
+      "id": "KSLC",
+      "name": "Salt Lake Intl",
+      "url": "https://www.weather.gov/wrh/timeseries?site=KSLC&hours=72",
+      "wind": {
+       "dir_deg": 260,
+       "speed_kt": 4
+      },
+      "summary": "01:15Z. 250°–280° at 4–5 kt; forecast to turn to 150° after 03Z."
+     },
+     {
+      "id": "KPVU",
+      "name": "Provo",
+      "url": "https://www.weather.gov/wrh/timeseries?site=KPVU&hours=72",
+      "wind": {
+       "dir_deg": 0,
+       "speed_kt": 0
+      },
+      "summary": "01:15Z. Calm."
+     }
+    ],
+    "links": [
+     {
+      "label": "NWS observations map (Salt Lake City)",
+      "url": "https://www.weather.gov/wrh/hazards?obs=true&wfo=slc&center=40.48,-111.87&zoom=11"
+     },
+     {
+      "label": "Windy wind map",
+      "url": "https://www.windy.com/?40.480,-111.870,11"
+     }
+    ]
+   },
+   "spots": [
+    {
+     "id": "pom-south",
+     "name": "POM South",
+     "lat": 40.4567,
+     "lon": -111.9027,
+     "face_deg": 150,
+     "flyable_arc_deg": [
+      155,
+      215
+     ],
+     "elevation_ft": 5148,
+     "landing_elevation_ft": 4834,
+     "links": [
+      {
+       "label": "UHGPGA site guide",
+       "url": "https://www.uhgpga.org/pom-south-side"
+      }
+     ],
+     "cells": {
+      "d2-am": {
+       "rating": "marginal",
+       "chance": 40,
+       "confidence": "medium",
+       "headline": "Light 150°–160° drainage, but flow aloft sits below 160° — rotor risk",
+       "window": "08:00–11:00",
+       "wind": {
+        "launch": {
+         "dir_deg": 160,
+         "speed_kt": [
+          6,
+          7
+         ],
+         "gust_kt": [
+          9,
+          11
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,900 ft above landing",
+          "dir_deg": 146,
+          "speed_kt": [
+           6,
+           10
+          ]
+         },
+         {
+          "level": "3,700 ft above landing",
+          "dir_deg": 153,
+          "speed_kt": [
+           9,
+           15
+          ]
+         },
+         {
+          "level": "5,500 ft above landing",
+          "dir_deg": 165,
+          "speed_kt": [
+           10,
+           15
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "warn",
+         "detail": "Launch forecast 150° at 07:00 (red band, at the limit), 160° from 08:00 (edge of yellow band 160°–170°)."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "6–7 kt gusting 9–11 kt: top 11 kt, yellow band (≤15 kt)."
+        },
+        {
+         "rule": "Rotor below 160° (hills toward ~135°)",
+         "result": "warn",
+         "detail": "Flow 1,900 ft above landing 141°–149° at 6–10 kt until 11:00, 150°–157° at 3,700 ft; light, but on the wrong side of 160°."
+        },
+        {
+         "rule": "Bowl rotor (flow from ~270°)",
+         "result": "pass",
+         "detail": "No flow near 270° at any level."
+        },
+        {
+         "rule": "Mixing down",
+         "result": "pass",
+         "detail": "Strong inversion, mixing height 741 ft until 10:00; flow aloft only 6–15 kt, below the 20 kt concern level."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0% precipitation and thunder, sky 5–10%."
+        },
+        {
+         "rule": "Thermal turbulence",
+         "result": "pass",
+         "detail": "Inversion and haze keep the morning stable."
+        },
+        {
+         "rule": "Diurnal pattern",
+         "result": "pass",
+         "detail": "Follows the normal morning drainage pattern, though from ~150°–160° rather than 170°–195°."
+        },
+        {
+         "rule": "Observations vs forecast",
+         "result": "warn",
+         "detail": "Wednesday-evening obs only: Lehi 131°–143° 4–10 kt, airport forecast 150°/5 kt for the morning. Both point to flow below 160°."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Flow below 160° — rotor off the hills toward ~135°",
+         "why": "With flow from 140°–155° the hills toward ~135° from launch put the launch area in their lee; rotor can be present even when the sock looks light.",
+         "triggered_by": "Winds aloft 141°–157° at 6–15 kt (1,900–3,700 ft above landing), launch forecast 150°–160° (GFS, NWS hourly forecast)",
+         "investigate": "Watch the sock and streamers: launch only when the wind is steady from 160° or more. If it sits at 140°–155° or cycles, wait or walk away."
+        },
+        {
+         "severity": "abort",
+         "title": "Wind increase before launch",
+         "triggered_by": "Spot rule",
+         "investigate": "A clear increase on launch before you go → do not launch."
+        }
+       ],
+       "explanation": "Classic ridge morning: inversion, light drainage at 6–7 kt (gusts to 11) and no mixing threat. The catch is direction: the launch forecast sits right at 160°, and the flow above launch is 141°–157°, which is the rotor direction for this site. Observations from Wednesday evening (Lehi 131°–143°) agree. If the sock shows a steady 160°–195°, it's a good morning; if it stays below 160°, don't launch.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM South launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/98,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "Airport forecasts — Salt Lake & Provo (TAF)",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=json"
+        },
+        {
+         "label": "Observations — Lehi",
+         "url": "https://api.weather.gov/stations/F3671/observations?limit=6"
+        },
+        {
+         "label": "Observations — Spanish Fork",
+         "url": "https://api.weather.gov/stations/FPS/observations?limit=6"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d2-pm": {
+       "rating": "marginal",
+       "chance": 40,
+       "confidence": "low",
+       "headline": "Very light 160° under the inversion — but the usual switch to ~320° may still come",
+       "window": "12:00–14:00",
+       "wind": {
+        "launch": {
+         "dir_deg": 160,
+         "speed_kt": [
+          3,
+          6
+         ],
+         "gust_kt": [
+          8,
+          11
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,900 ft above landing",
+          "dir_deg": 175,
+          "speed_kt": [
+           4,
+           10
+          ]
+         },
+         {
+          "level": "3,600 ft above landing",
+          "dir_deg": 168,
+          "speed_kt": [
+           9,
+           15
+          ]
+         },
+         {
+          "level": "5,500 ft above landing",
+          "dir_deg": 161,
+          "speed_kt": [
+           15,
+           17
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "warn",
+         "detail": "NWS launch forecast 160° all afternoon (edge of yellow band), but the Salt Lake airport forecast turns to 320°/6 kt from 11:00 — that would be tail wind here."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "3–6 kt gusting 8–11 kt: top 11 kt, yellow band."
+        },
+        {
+         "rule": "Rotor below 160° (hills toward ~135°)",
+         "result": "pass",
+         "detail": "Flow 1,900 ft above landing 160°–188° from 12:00 to 15:00; 141°–163° at 4 kt at 16:00–17:00 (very light)."
+        },
+        {
+         "rule": "Bowl rotor (flow from ~270°)",
+         "result": "pass",
+         "detail": "No flow near 270° forecast; watch it if the switch to ~320° comes through."
+        },
+        {
+         "rule": "Mixing down",
+         "result": "pass",
+         "detail": "Mixing height ~1,670 ft; flow at 1,900–5,500 ft above landing only 4–17 kt."
+        },
+        {
+         "rule": "Thermal turbulence",
+         "result": "warn",
+         "detail": "Midday slot, but under a strong inversion and with only 3–6 kt; thermals should be weak."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0% precipitation and thunder."
+        },
+        {
+         "rule": "Diurnal pattern",
+         "result": "warn",
+         "detail": "The NWS launch forecast keeps 160° all afternoon (inversion suppresses the switch); the airport forecast and Wednesday's obs (South Valley Regional 340°–350° at 15:15–15:35 local) show the normal switch to ~320°–350°."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Afternoon switch to ~320° would put this launch on tail",
+         "why": "Valley heating usually reverses the flow to ~320°–360° in the afternoon; that wind comes from behind POM South.",
+         "triggered_by": "Salt Lake airport forecast 320°/6 kt from 11:00 local (TAF); South Valley Regional 340° 6 kt Wednesday 15:15 local",
+         "investigate": "Check the sock and the South Valley Regional / Lehi stations before walking up; launch only on a steady 160°–205°."
+        }
+       ],
+       "explanation": "Speeds are tiny (3–6 kt) and nothing aloft threatens, so the question is direction. The NWS launch forecast holds 160° all afternoon under the inversion, while the airport forecast and yesterday's pattern say the flow turns to ~320° — tail wind here. Fly early in the slot only if the sock confirms 160°–205°.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM South launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/98,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "Airport forecasts — Salt Lake & Provo (TAF)",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=json"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d3-am": {
+       "rating": "nogo",
+       "chance": 25,
+       "confidence": "medium",
+       "headline": "150° at 9 kt gusting 14 — below the 160° rotor line most of the morning",
+       "window": "11:00–12:00",
+       "wind": {
+        "launch": {
+         "dir_deg": 150,
+         "speed_kt": 9,
+         "gust_kt": [
+          13,
+          15
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,700 ft above landing",
+          "dir_deg": 156,
+          "speed_kt": [
+           8,
+           14
+          ]
+         },
+         {
+          "level": "3,400 ft above landing",
+          "dir_deg": 175,
+          "speed_kt": [
+           10,
+           19
+          ]
+         },
+         {
+          "level": "5,300 ft above landing",
+          "dir_deg": 190,
+          "speed_kt": [
+           15,
+           20
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "150° from 07:00 to 10:00 (red band, at the limit); 170° at 11:00 (green)."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "9 kt gusting 13–15 kt: top 15 kt, yellow band."
+        },
+        {
+         "rule": "Rotor below 160° (hills toward ~135°)",
+         "result": "fail",
+         "detail": "Launch 150° and flow 1,700 ft above landing 150°–162° at 11–14 kt from 07:00 to 10:00."
+        },
+        {
+         "rule": "Bowl rotor (flow from ~270°)",
+         "result": "pass",
+         "detail": "No flow near 270°."
+        },
+        {
+         "rule": "Mixing down",
+         "result": "warn",
+         "detail": "Flow 3,400–5,300 ft above landing 18–20 kt at 07:00–08:00; mixing height jumps from 505 ft to ~4,990 ft by 11:00."
+        },
+        {
+         "rule": "Thermal turbulence",
+         "result": "warn",
+         "detail": "Deep mixing (~4,990 ft) from 11:00 makes the late morning thermic."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0% precipitation and thunder; sky 37–71%."
+        },
+        {
+         "rule": "Diurnal pattern",
+         "result": "pass",
+         "detail": "Drainage pattern reinforced by the pre-trough gradient."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Flow from 150° — rotor off the hills toward ~135°",
+         "why": "Below 160° the launch sits in the lee of the hills toward ~135°; with 11–14 kt above launch the rotor is real.",
+         "triggered_by": "Launch forecast 150° at 9 kt gusting 13–14 kt (07:00–10:00), flow 1,700 ft above landing 150°–162° at 11–14 kt (NWS hourly, GFS)",
+         "investigate": "Don't launch while the sock shows below 160°."
+        },
+        {
+         "severity": "caution",
+         "title": "Stronger flow aloft mixing down from ~11:00",
+         "why": "The forecast mixing height jumps to ~4,990 ft at 11:00, bringing the 15–20 kt flow above launch toward the surface.",
+         "triggered_by": "Mixing height 505 → 4,990 ft at 11:00; 15–20 kt at 3,400–5,300 ft above landing (NWS hourly, GFS)",
+         "investigate": "If you go late morning, watch for gusts building and sock cycling; any increase before launch → don't launch."
+        }
+       ],
+       "explanation": "The pre-trough gradient strengthens the drainage, but from 150° — at the red limit and inside the rotor sector below 160° — with 9 kt gusting 14. The direction swings to 170° around 11:00, the same hour deep mixing and thermals start, so the one usable hour is 11:00–12:00 and only if the sock shows a steady 160°+.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM South launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/98,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d3-pm": {
+       "rating": "marginal",
+       "chance": 40,
+       "confidence": "medium",
+       "headline": "170° on the face, 8–9 kt gusting 15–16, thermic and deeply mixed",
+       "window": "12:00–14:00",
+       "wind": {
+        "launch": {
+         "dir_deg": 170,
+         "speed_kt": [
+          8,
+          9
+         ],
+         "gust_kt": [
+          15,
+          16
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,600 ft above landing",
+          "dir_deg": 177,
+          "speed_kt": [
+           3,
+           6
+          ]
+         },
+         {
+          "level": "3,300 ft above landing",
+          "dir_deg": 174,
+          "speed_kt": [
+           6,
+           9
+          ]
+         },
+         {
+          "level": "5,200 ft above landing",
+          "dir_deg": 180,
+          "speed_kt": [
+           9,
+           12
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "pass",
+         "detail": "170° from 12:00 to 16:00 (green band)."
+        },
+        {
+         "rule": "Speed",
+         "result": "warn",
+         "detail": "8–9 kt gusting 15–16 kt: top 16 kt from 14:00, orange band (≤20 kt); 15 kt (yellow) at 12:00–13:00."
+        },
+        {
+         "rule": "Rotor below 160° (hills toward ~135°)",
+         "result": "pass",
+         "detail": "Flow 1,600–5,200 ft above landing 166°–191° until 16:00; 153° at 3 kt at 17:00 (negligible)."
+        },
+        {
+         "rule": "Bowl rotor (flow from ~270°)",
+         "result": "pass",
+         "detail": "No flow near 270°."
+        },
+        {
+         "rule": "Thermal turbulence",
+         "result": "warn",
+         "detail": "Mixing height ~4,990 ft: thermic, gusty air near terrain."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "warn",
+         "detail": "0% until 16:00; 15% precipitation and 4% thunder at 17:00 as the trough approaches."
+        },
+        {
+         "rule": "Diurnal pattern",
+         "result": "warn",
+         "detail": "Departs from the norm: the gradient holds 160°–180° all afternoon, no switch to ~320° expected."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Gusty thermic afternoon",
+         "why": "Deep mixing turns the steady flow into gusts 6–8 kt above the mean, with irregular lift and sink close to the hill.",
+         "triggered_by": "Launch 8–9 kt gusting 15–16 kt, mixing height ~4,990 ft (NWS hourly forecast)",
+         "investigate": "Watch the sock for a few minutes: gusts much above 16 kt or calm-to-strong cycling → don't launch."
+        },
+        {
+         "severity": "info",
+         "title": "Showers possible from late afternoon",
+         "triggered_by": "15% precipitation, 4% thunder at 17:00 (NWS hourly forecast)",
+         "investigate": "Look for virga or showers to the south and west before launching."
+        }
+       ],
+       "explanation": "Flow from 170° is right on the face and the gradient holds it there all afternoon instead of the usual switch to ~320°. Speeds are fine on average but gusts reach 15–16 kt in a deeply mixed, thermic airmass — marginal. Earlier (12:00–14:00, gusts 15 kt) is a little better; showers start to become possible at the end of the day.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM South launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/98,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d4-am": {
+       "rating": "nogo",
+       "chance": 5,
+       "confidence": "high",
+       "headline": "Rain with the trough passage; 160°–180° gusting 15–18, flow aloft flips to ~300°",
+       "wind": {
+        "launch": {
+         "dir_deg": 170,
+         "speed_kt": [
+          7,
+          11
+         ],
+         "gust_kt": [
+          13,
+          18
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,500 ft above landing",
+          "dir_deg": 160,
+          "speed_kt": [
+           3,
+           8
+          ]
+         },
+         {
+          "level": "3,200 ft above landing",
+          "dir_deg": 170,
+          "speed_kt": [
+           6,
+           10
+          ]
+         },
+         {
+          "level": "5,000 ft above landing",
+          "dir_deg": 200,
+          "speed_kt": [
+           8,
+           20
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Precipitation",
+         "result": "fail",
+         "detail": "98% chance of precipitation 07:00–10:00, 90% at 11:00–12:00; sky 94–99%."
+        },
+        {
+         "rule": "Convection",
+         "result": "warn",
+         "detail": "7–10% thunder."
+        },
+        {
+         "rule": "Direction (wind rose)",
+         "result": "pass",
+         "detail": "160°–180° at launch."
+        },
+        {
+         "rule": "Speed",
+         "result": "warn",
+         "detail": "Top 11 kt gusting 18 kt at 07:00 (orange band); 7–9 kt gusting 13–15 kt later."
+        },
+        {
+         "rule": "Rotor below 160° (hills toward ~135°)",
+         "result": "pass",
+         "detail": "Low-level flow 157°–173° until 08:00."
+        },
+        {
+         "rule": "Bowl rotor (flow from ~270°)",
+         "result": "warn",
+         "detail": "Flow aloft swings to 281°–345° from 09:00 as the trough passes (8–15 kt)."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Rain with the trough",
+         "triggered_by": "98% precipitation chance (NWS hourly forecast); 80% chance of widespread valley rain Saturday (NWS forecast discussion)",
+         "investigate": "Wet wing and slick launch — don't fly while it rains."
+        }
+       ],
+       "explanation": "The trough brings widespread valley rain through the morning, and the flow aloft flips from ~200° to ~300°–345° around 09:00 as it passes. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM South launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/98,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d4-pm": {
+       "rating": "nogo",
+       "chance": 3,
+       "confidence": "high",
+       "headline": "Rain, then flow from ~300° — tail wind on this face",
+       "wind": {
+        "launch": {
+         "dir_deg": 300,
+         "speed_kt": [
+          4,
+          7
+         ],
+         "gust_kt": [
+          8,
+          13
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,600 ft above landing",
+          "dir_deg": 314,
+          "speed_kt": [
+           4,
+           5
+          ]
+         },
+         {
+          "level": "3,300 ft above landing",
+          "dir_deg": 316,
+          "speed_kt": [
+           6,
+           7
+          ]
+         },
+         {
+          "level": "5,100 ft above landing",
+          "dir_deg": 312,
+          "speed_kt": [
+           8,
+           11
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Precipitation",
+         "result": "fail",
+         "detail": "90% precipitation chance until 16:00, 25% at 17:00; 10% thunder."
+        },
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "180° until 13:00, then 300° from 14:00 and 0° at 17:00: tail wind, outside every band."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "4–7 kt gusting 8–13 kt."
+        },
+        {
+         "rule": "Rotor",
+         "result": "fail",
+         "detail": "Lee side: wind from behind the ridge puts the launch in rotor (flow 302°–324° at 1,600–5,100 ft above landing). Flow near 270°–300° also triggers the west-end bowl rotor."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Rain and tail wind",
+         "triggered_by": "90% precipitation chance; launch wind turning to 300° from 14:00 (NWS hourly forecast)",
+         "investigate": "Not a POM South afternoon."
+        }
+       ],
+       "explanation": "Rain continues most of the afternoon and the post-trough flow from ~300°–320° puts POM South in its own lee. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM South launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/98,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "pom-north",
+     "name": "POM North",
+     "lat": 40.4745,
+     "lon": -111.8928,
+     "face_deg": 330,
+     "flyable_arc_deg": [
+      280,
+      40
+     ],
+     "elevation_ft": 5100,
+     "landing_elevation_ft": 4700,
+     "links": [
+      {
+       "label": "UHGPGA site guide",
+       "url": "https://www.uhgpga.org/pom-north-side"
+      }
+     ],
+     "cells": {
+      "d2-am": {
+       "rating": "nogo",
+       "chance": 5,
+       "confidence": "high",
+       "headline": "Morning drainage from 140°–160° — tail wind on the north face",
+       "wind": {
+        "launch": {
+         "dir_deg": 150,
+         "speed_kt": [
+          6,
+          7
+         ],
+         "gust_kt": [
+          10,
+          11
+         ]
+        },
+        "aloft": [
+         {
+          "level": "2,000 ft above landing",
+          "dir_deg": 146,
+          "speed_kt": [
+           6,
+           10
+          ]
+         },
+         {
+          "level": "3,800 ft above landing",
+          "dir_deg": 153,
+          "speed_kt": [
+           9,
+           15
+          ]
+         },
+         {
+          "level": "5,600 ft above landing",
+          "dir_deg": 165,
+          "speed_kt": [
+           10,
+           15
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 140°–160°: outside every band."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "6–7 kt gusting 10–11 kt."
+        },
+        {
+         "rule": "Rotor",
+         "result": "fail",
+         "detail": "Lee side: wind from behind the ridge puts the launch in rotor (flow 141°–162° at 300–3,800 ft above landing)."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0%."
+        },
+        {
+         "rule": "Observations vs forecast",
+         "result": "pass",
+         "detail": "Wednesday-evening drainage already at Lehi (131°–143°); airport forecast 150°/5 kt for the morning."
+        }
+       ],
+       "explanation": "Normal morning pattern: drainage from ~150° loads POM South, which puts POM North in the lee. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM North launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/99,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "Airport forecasts — Salt Lake & Provo (TAF)",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=json"
+        },
+        {
+         "label": "Observations — Lehi",
+         "url": "https://api.weather.gov/stations/F3671/observations?limit=6"
+        }
+       ]
+      },
+      "d2-pm": {
+       "rating": "marginal",
+       "chance": 35,
+       "confidence": "low",
+       "headline": "Forecasts disagree: launch grid holds 160° (tail), airport forecast switches to 320°",
+       "window": "14:30–17:00",
+       "wind": {
+        "launch": {
+         "dir_deg": 160,
+         "speed_kt": [
+          3,
+          6
+         ],
+         "gust_kt": [
+          7,
+          10
+         ]
+        },
+        "aloft": [
+         {
+          "level": "300 ft above landing",
+          "dir_deg": 158,
+          "speed_kt": [
+           1,
+           5
+          ]
+         },
+         {
+          "level": "2,000 ft above landing",
+          "dir_deg": 175,
+          "speed_kt": [
+           4,
+           10
+          ]
+         },
+         {
+          "level": "3,700 ft above landing",
+          "dir_deg": 168,
+          "speed_kt": [
+           9,
+           15
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "warn",
+         "detail": "NWS launch forecast 160° (tail) 12:00–16:00, 50° at 17:00; the Salt Lake airport forecast has 320°/6 kt from 11:00 (green band), and GFS turns the lowest level to 18°–351° at 16:00–17:00."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "3–6 kt gusting 7–10 kt: green to yellow band."
+        },
+        {
+         "rule": "Steep Mountain rotor (flow aloft ~290°–340°)",
+         "result": "pass",
+         "detail": "Flow aloft 141°–188°, not from 290°–340°."
+        },
+        {
+         "rule": "Rotor (lee side)",
+         "result": "warn",
+         "detail": "Flow 2,000–3,700 ft above landing 160°–188° at 4–15 kt comes from behind the launch; light, but a surface switch to ~320° would sit under it."
+        },
+        {
+         "rule": "Crosswind 60°–120° (finger turbulence)",
+         "result": "warn",
+         "detail": "50° at 3 kt gusting 7 kt forecast at 17:00."
+        },
+        {
+         "rule": "Thermal turbulence",
+         "result": "pass",
+         "detail": "Strong inversion, very light wind."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0%."
+        },
+        {
+         "rule": "Diurnal pattern",
+         "result": "warn",
+         "detail": "Forecast diverges: the launch forecast suppresses the usual afternoon switch to ~320°–360°, though Wednesday's obs (South Valley Regional 320°–350°) show it happened under the same ridge."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "caution",
+         "title": "Switch to ~320° may not reach the launch",
+         "why": "The inversion can keep the valley breeze shallow or stop it short of the Point; the launch forecast keeps flow from 160°, i.e. from behind the launch.",
+         "triggered_by": "NWS launch forecast 160° 3–6 kt all afternoon vs Salt Lake airport forecast 320°/6 kt (TAF)",
+         "investigate": "Check the South Valley Regional and Salt Lake airport stations and the sock: launch only on a steady 310°–010°. Mixed or cycling sock = the switch hasn't arrived."
+        }
+       ],
+       "explanation": "Under the ridge the afternoon valley breeze from ~320° normally reaches POM North and did so on Wednesday, and the airport forecast agrees. The NWS launch forecast, however, keeps light flow from 160° all afternoon, which would be tail wind. Speeds are very light either way; it comes down to whether the switch arrives — confirm on the sock.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM North launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/99,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "Airport forecasts — Salt Lake & Provo (TAF)",
+         "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=json"
+        },
+        {
+         "label": "Observations — South Valley Regional",
+         "url": "https://api.weather.gov/stations/KSVR/observations?limit=6"
+        }
+       ]
+      },
+      "d3-am": {
+       "rating": "nogo",
+       "chance": 3,
+       "confidence": "high",
+       "headline": "150° at 10–11 kt gusting 15 — tail wind",
+       "wind": {
+        "launch": {
+         "dir_deg": 150,
+         "speed_kt": [
+          9,
+          11
+         ],
+         "gust_kt": [
+          14,
+          15
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,800 ft above landing",
+          "dir_deg": 156,
+          "speed_kt": [
+           8,
+           14
+          ]
+         },
+         {
+          "level": "3,500 ft above landing",
+          "dir_deg": 175,
+          "speed_kt": [
+           10,
+           19
+          ]
+         },
+         {
+          "level": "5,400 ft above landing",
+          "dir_deg": 190,
+          "speed_kt": [
+           15,
+           20
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 150°–170°."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "9–11 kt gusting 14–15 kt: yellow band."
+        },
+        {
+         "rule": "Rotor",
+         "result": "fail",
+         "detail": "Lee side: wind from behind the ridge puts the launch in rotor (flow 150°–195° at 8–20 kt above launch)."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0%."
+        }
+       ],
+       "explanation": "The pre-trough gradient strengthens the flow from ~150°–190°, straight from behind the north face. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM North launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/99,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        }
+       ]
+      },
+      "d3-pm": {
+       "rating": "nogo",
+       "chance": 3,
+       "confidence": "high",
+       "headline": "170° gusting 16 all afternoon — no switch, tail wind",
+       "wind": {
+        "launch": {
+         "dir_deg": 170,
+         "speed_kt": [
+          6,
+          9
+         ],
+         "gust_kt": [
+          11,
+          16
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,700 ft above landing",
+          "dir_deg": 177,
+          "speed_kt": [
+           3,
+           6
+          ]
+         },
+         {
+          "level": "3,400 ft above landing",
+          "dir_deg": 174,
+          "speed_kt": [
+           6,
+           9
+          ]
+         },
+         {
+          "level": "5,300 ft above landing",
+          "dir_deg": 180,
+          "speed_kt": [
+           9,
+           12
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 160°–170°."
+        },
+        {
+         "rule": "Speed",
+         "result": "warn",
+         "detail": "Top 9 kt gusting 16 kt: orange band."
+        },
+        {
+         "rule": "Rotor",
+         "result": "fail",
+         "detail": "Lee side: wind from behind the ridge puts the launch in rotor (flow 166°–191° above launch, deep mixing to ~5,000 ft)."
+        },
+        {
+         "rule": "Diurnal pattern",
+         "result": "fail",
+         "detail": "Gradient overrides the afternoon switch to ~320°."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "warn",
+         "detail": "15% precipitation, 4% thunder at 17:00."
+        }
+       ],
+       "explanation": "The gradient ahead of the trough keeps flow from ~170° all afternoon, so the usual switch that loads POM North doesn't happen. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM North launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/99,162"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d4-am": {
+       "rating": "nogo",
+       "chance": 3,
+       "confidence": "high",
+       "headline": "Rain and 160°–190° gusting up to 20 as the trough passes",
+       "wind": {
+        "launch": {
+         "dir_deg": 170,
+         "speed_kt": [
+          8,
+          12
+         ],
+         "gust_kt": [
+          13,
+          20
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,600 ft above landing",
+          "dir_deg": 160,
+          "speed_kt": [
+           3,
+           8
+          ]
+         },
+         {
+          "level": "3,300 ft above landing",
+          "dir_deg": 170,
+          "speed_kt": [
+           6,
+           10
+          ]
+         },
+         {
+          "level": "5,100 ft above landing",
+          "dir_deg": 200,
+          "speed_kt": [
+           8,
+           20
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Precipitation",
+         "result": "fail",
+         "detail": "98% precipitation chance 07:00–10:00, 91% 11:00–12:00; 7–10% thunder."
+        },
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 160°–190°."
+        },
+        {
+         "rule": "Speed",
+         "result": "warn",
+         "detail": "12 kt gusting 20 kt at 07:00: orange band."
+        },
+        {
+         "rule": "Rotor",
+         "result": "fail",
+         "detail": "Lee side: wind from behind the ridge puts the launch in rotor until the flow aloft turns to ~300° around 09:00."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Rain with the trough",
+         "triggered_by": "98% precipitation chance (NWS hourly forecast)",
+         "investigate": "Don't fly while it rains."
+        }
+       ],
+       "explanation": "Rain all morning and tail wind at launch. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM North launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/99,162"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d4-pm": {
+       "rating": "nogo",
+       "chance": 8,
+       "confidence": "medium",
+       "headline": "Rain until ~16:00; post-trough flow from ~300°–320° after",
+       "window": "16:30–17:12",
+       "wind": {
+        "launch": {
+         "dir_deg": 290,
+         "speed_kt": [
+          4,
+          8
+         ],
+         "gust_kt": [
+          9,
+          13
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,700 ft above landing",
+          "dir_deg": 314,
+          "speed_kt": [
+           4,
+           5
+          ]
+         },
+         {
+          "level": "3,400 ft above landing",
+          "dir_deg": 316,
+          "speed_kt": [
+           6,
+           7
+          ]
+         },
+         {
+          "level": "5,200 ft above landing",
+          "dir_deg": 312,
+          "speed_kt": [
+           8,
+           11
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Precipitation",
+         "result": "fail",
+         "detail": "91% precipitation chance 12:00–16:00, 26% at 17:00; 10% thunder."
+        },
+        {
+         "rule": "Direction (wind rose)",
+         "result": "warn",
+         "detail": "190° until 13:00 (tail), 290° from 14:00 (yellow band), 350° at 17:00 (green)."
+        },
+        {
+         "rule": "Speed",
+         "result": "pass",
+         "detail": "4–8 kt gusting 9–13 kt."
+        },
+        {
+         "rule": "Steep Mountain rotor (flow aloft ~290°–340°)",
+         "result": "warn",
+         "detail": "Flow aloft 302°–324° — the trigger direction — but only 4–11 kt up to 5,200 ft above landing (not strong)."
+        },
+        {
+         "rule": "Thermal turbulence",
+         "result": "pass",
+         "detail": "Overcast and wet, no thermals."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Rain",
+         "triggered_by": "91% precipitation chance until 16:00 (NWS hourly forecast)",
+         "investigate": "Don't fly while it rains; launch will be slick afterwards."
+        },
+        {
+         "severity": "caution",
+         "title": "Flow aloft from ~310° — Steep Mountain rotor direction",
+         "why": "Post-trough flow from ~290°–340° passes over Steep Mountain and can tumble down onto the launch; today it's light, but it can strengthen behind the trough.",
+         "triggered_by": "Winds aloft 302°–324° at 4–11 kt (GFS)",
+         "investigate": "Brisk, buoyant feel at the top or a cycling sock → don't launch."
+        }
+       ],
+       "explanation": "Rain dominates the afternoon; the flow turns to ~290°–350° (the right direction for this face) as the trough passes, but the last hour before sunset is the only dry-ish window and the launch will be wet. Post-trough flow aloft is from the Steep Mountain rotor sector, though light.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — POM North launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/99,162"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "cherry",
+     "name": "Cherry",
+     "lat": 40.5153,
+     "lon": -111.827,
+     "face_deg": 305,
+     "flyable_arc_deg": [
+      290,
+      10
+     ],
+     "elevation_ft": 6067,
+     "landing_elevation_ft": 4855,
+     "links": [],
+     "cells": {
+      "d2-am": {
+       "rating": "nogo",
+       "chance": 5,
+       "confidence": "high",
+       "headline": "Flow from 100°–140° — tail wind on a 305° launch",
+       "wind": {
+        "launch": {
+         "dir_deg": 110,
+         "speed_kt": [
+          4,
+          6
+         ],
+         "gust_kt": [
+          8,
+          9
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,800 ft above landing",
+          "dir_deg": 146,
+          "speed_kt": [
+           6,
+           10
+          ]
+         },
+         {
+          "level": "3,600 ft above landing",
+          "dir_deg": 153,
+          "speed_kt": [
+           9,
+           15
+          ]
+         },
+         {
+          "level": "5,400 ft above landing",
+          "dir_deg": 165,
+          "speed_kt": [
+           10,
+           15
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 100°–140°: outside every band."
+        },
+        {
+         "rule": "Speed (Cherry bands)",
+         "result": "warn",
+         "detail": "4–6 kt gusting 8–9 kt: yellow band (≤10 kt)."
+        },
+        {
+         "rule": "Rotor",
+         "result": "fail",
+         "detail": "Lee side: wind from behind the ridge puts the launch in rotor. Flow 1,800 ft above landing reaches 160° at 12:00 (start of the 160°–220° trigger)."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0%."
+        }
+       ],
+       "explanation": "Morning drainage blows down the slope from behind the launch. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — Cherry launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/101,164"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        },
+        {
+         "label": "Observations — Alpine",
+         "url": "https://api.weather.gov/stations/UTALP/observations?limit=6"
+        }
+       ]
+      },
+      "d2-pm": {
+       "rating": "nogo",
+       "chance": 5,
+       "confidence": "medium",
+       "headline": "Flow aloft from 160°–188° — Cherry rotor trigger",
+       "wind": {
+        "launch": {
+         "dir_deg": 150,
+         "speed_kt": [
+          3,
+          4
+         ],
+         "gust_kt": [
+          7,
+          8
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,800 ft above landing",
+          "dir_deg": 175,
+          "speed_kt": [
+           4,
+           10
+          ]
+         },
+         {
+          "level": "3,500 ft above landing",
+          "dir_deg": 168,
+          "speed_kt": [
+           9,
+           15
+          ]
+         },
+         {
+          "level": "5,400 ft above landing",
+          "dir_deg": 161,
+          "speed_kt": [
+           15,
+           17
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 120°–160°."
+        },
+        {
+         "rule": "Speed (Cherry bands)",
+         "result": "warn",
+         "detail": "3–4 kt gusting 7–8 kt: yellow band."
+        },
+        {
+         "rule": "Rotor (flow aloft 160°–220°)",
+         "result": "fail",
+         "detail": "Flow 1,800–3,500 ft above landing 157°–188° at 6–15 kt from 12:00 to 16:00."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "pass",
+         "detail": "0%."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Flow aloft from 160°–188° — rotor",
+         "why": "Flow from 160°–220° crosses the ridge behind Cherry and drops into rotor on the launch.",
+         "triggered_by": "Winds aloft 157°–188° at 6–15 kt, 1,800–3,500 ft above landing (GFS)",
+         "investigate": "No-go regardless of how calm the launch looks."
+        }
+       ],
+       "explanation": "Light flow at launch, but from behind, and the flow above the ridge is in Cherry's 160°–220° rotor sector. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — Cherry launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/101,164"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        }
+       ]
+      },
+      "d3-am": {
+       "rating": "nogo",
+       "chance": 2,
+       "confidence": "high",
+       "headline": "140° at 12–13 kt gusting 17, rotor flow aloft",
+       "wind": {
+        "launch": {
+         "dir_deg": 140,
+         "speed_kt": [
+          9,
+          13
+         ],
+         "gust_kt": [
+          15,
+          17
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,600 ft above landing",
+          "dir_deg": 156,
+          "speed_kt": [
+           8,
+           14
+          ]
+         },
+         {
+          "level": "3,300 ft above landing",
+          "dir_deg": 175,
+          "speed_kt": [
+           10,
+           19
+          ]
+         },
+         {
+          "level": "5,200 ft above landing",
+          "dir_deg": 190,
+          "speed_kt": [
+           15,
+           20
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 140°–170°."
+        },
+        {
+         "rule": "Speed (Cherry bands)",
+         "result": "fail",
+         "detail": "12–13 kt gusting 15–17 kt: past the 15 kt limit."
+        },
+        {
+         "rule": "Rotor (flow aloft 160°–220°)",
+         "result": "fail",
+         "detail": "Flow 3,300 ft above landing 162°–184° at 10–19 kt."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Flow aloft from 160°–220° — rotor",
+         "triggered_by": "Winds aloft 162°–184° at 10–19 kt, 3,300 ft above landing (GFS)",
+         "investigate": "No-go."
+        }
+       ],
+       "explanation": "Too strong, from behind, and in the rotor sector. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — Cherry launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/101,164"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        }
+       ]
+      },
+      "d3-pm": {
+       "rating": "nogo",
+       "chance": 2,
+       "confidence": "high",
+       "headline": "170°–180° gusting 16, rotor flow aloft",
+       "wind": {
+        "launch": {
+         "dir_deg": 175,
+         "speed_kt": [
+          5,
+          9
+         ],
+         "gust_kt": [
+          10,
+          16
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,500 ft above landing",
+          "dir_deg": 177,
+          "speed_kt": [
+           3,
+           6
+          ]
+         },
+         {
+          "level": "3,200 ft above landing",
+          "dir_deg": 174,
+          "speed_kt": [
+           6,
+           9
+          ]
+         },
+         {
+          "level": "5,100 ft above landing",
+          "dir_deg": 180,
+          "speed_kt": [
+           9,
+           12
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "Tail wind, 160°–180°."
+        },
+        {
+         "rule": "Speed (Cherry bands)",
+         "result": "fail",
+         "detail": "9 kt gusting 15–16 kt: at and past the 15 kt limit."
+        },
+        {
+         "rule": "Rotor (flow aloft 160°–220°)",
+         "result": "fail",
+         "detail": "Flow 1,500–3,200 ft above landing 166°–191° at 4–9 kt, with deep mixing (~5,270 ft)."
+        },
+        {
+         "rule": "Convection / precipitation",
+         "result": "warn",
+         "detail": "16% precipitation, 4% thunder at 17:00."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Flow aloft from 160°–220° — rotor",
+         "triggered_by": "Winds aloft 166°–191°, 1,500–3,200 ft above landing (GFS)",
+         "investigate": "No-go."
+        }
+       ],
+       "explanation": "Gusty flow from behind the launch and rotor-sector flow over the ridge. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — Cherry launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/101,164"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        }
+       ]
+      },
+      "d4-am": {
+       "rating": "nogo",
+       "chance": 2,
+       "confidence": "high",
+       "headline": "Rain, 150°–200° gusting up to 21",
+       "wind": {
+        "launch": {
+         "dir_deg": 170,
+         "speed_kt": [
+          6,
+          13
+         ],
+         "gust_kt": [
+          12,
+          21
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,400 ft above landing",
+          "dir_deg": 160,
+          "speed_kt": [
+           3,
+           8
+          ]
+         },
+         {
+          "level": "3,100 ft above landing",
+          "dir_deg": 170,
+          "speed_kt": [
+           6,
+           10
+          ]
+         },
+         {
+          "level": "4,900 ft above landing",
+          "dir_deg": 200,
+          "speed_kt": [
+           8,
+           20
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Precipitation",
+         "result": "fail",
+         "detail": "98% precipitation chance 07:00–10:00, 92% after; 7–10% thunder."
+        },
+        {
+         "rule": "Speed (Cherry bands)",
+         "result": "fail",
+         "detail": "13 kt gusting 21 kt at 07:00, 10 kt gusting 15 kt later."
+        },
+        {
+         "rule": "Rotor (flow aloft 160°–220°)",
+         "result": "fail",
+         "detail": "Flow 1,400–3,100 ft above landing 157°–173° until 08:00."
+        },
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "150°–200°: tail wind."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Rain with the trough",
+         "triggered_by": "98% precipitation chance (NWS hourly forecast)",
+         "investigate": "No-go."
+        }
+       ],
+       "explanation": "Rain, strong gusts and tail wind. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — Cherry launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/101,164"
+        },
+        {
+         "label": "NWS forecast discussion (Salt Lake City)",
+         "url": "https://forecast.weather.gov/product.php?site=SLC&issuedby=SLC&product=AFD"
+        }
+       ]
+      },
+      "d4-pm": {
+       "rating": "nogo",
+       "chance": 5,
+       "confidence": "medium",
+       "headline": "Rain until ~16:00; flow turns to 280°–330° late",
+       "wind": {
+        "launch": {
+         "dir_deg": 280,
+         "speed_kt": [
+          4,
+          6
+         ],
+         "gust_kt": [
+          8,
+          12
+         ]
+        },
+        "aloft": [
+         {
+          "level": "1,500 ft above landing",
+          "dir_deg": 314,
+          "speed_kt": [
+           4,
+           5
+          ]
+         },
+         {
+          "level": "3,200 ft above landing",
+          "dir_deg": 316,
+          "speed_kt": [
+           6,
+           7
+          ]
+         },
+         {
+          "level": "5,000 ft above landing",
+          "dir_deg": 312,
+          "speed_kt": [
+           8,
+           11
+          ]
+         }
+        ]
+       },
+       "checks": [
+        {
+         "rule": "Precipitation",
+         "result": "fail",
+         "detail": "92% precipitation chance 12:00–16:00, 31% at 17:00; 10% thunder."
+        },
+        {
+         "rule": "Direction (wind rose)",
+         "result": "fail",
+         "detail": "200° until 13:00 (tail), 280° 14:00–16:00 (red band, at the limit), 330° at 17:00 (green)."
+        },
+        {
+         "rule": "Speed (Cherry bands)",
+         "result": "warn",
+         "detail": "4–6 kt gusting 8–12 kt: past the 10 kt yellow band in gusts."
+        },
+        {
+         "rule": "Rotor (flow aloft 160°–220°)",
+         "result": "pass",
+         "detail": "Flow aloft 302°–324° from 11:00."
+        }
+       ],
+       "warnings": [
+        {
+         "severity": "abort",
+         "title": "Rain",
+         "triggered_by": "92% precipitation chance until 16:00 (NWS hourly forecast)",
+         "investigate": "No-go while wet."
+        }
+       ],
+       "explanation": "Rain most of the afternoon; the direction only becomes right (330°) in the last hour before sunset, on a wet launch. No-go.",
+       "sources": [
+        {
+         "label": "NWS hourly forecast — Cherry launch",
+         "url": "https://api.weather.gov/gridpoints/SLC/101,164"
+        },
+        {
+         "label": "Winds aloft forecast (GFS)",
+         "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless"
+        }
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "label": "NWS forecast discussion list (SLC)",
+   "url": "https://api.weather.gov/products/types/AFD/locations/SLC",
+   "fetched_at": "2026-11-12T02:04:18Z",
+   "ok": true
+  },
+  {
+   "label": "NWS forecast discussion (SLC)",
+   "url": "https://api.weather.gov/products/65b5edf2-13d7-4996-98dd-7684ff862dc1",
+   "fetched_at": "2026-11-12T02:04:18Z",
+   "ok": true
+  },
+  {
+   "label": "Winds aloft forecast (Open-Meteo GFS)",
+   "url": "https://api.open-meteo.com/v1/forecast?latitude=40.49&longitude=-111.868&hourly=wind_speed_850hPa,wind_direction_850hPa,geopotential_height_850hPa,wind_speed_800hPa,wind_direction_800hPa,geopotential_height_800hPa,wind_speed_750hPa,wind_direction_750hPa,geopotential_height_750hPa,wind_speed_700hPa,wind_direction_700hPa,geopotential_height_700hPa,wind_speed_600hPa,wind_direction_600hPa,geopotential_height_600hPa&wind_speed_unit=kn&timezone=America%2FDenver&forecast_days=5&models=gfs_seamless",
+   "fetched_at": "2026-11-12T02:04:18Z",
+   "ok": true
+  },
+  {
+   "label": "Airport forecasts (KSLC,KPVU)",
+   "url": "https://aviationweather.gov/api/data/taf?ids=KSLC,KPVU&format=json",
+   "fetched_at": "2026-11-12T02:04:18Z",
+   "ok": true
+  },
+  {
+   "label": "Airport observations (KSLC, 24 h)",
+   "url": "https://aviationweather.gov/api/data/metar?ids=KSLC&format=json&hours=24",
+   "fetched_at": "2026-11-12T02:04:18Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — Point of the Mountain (E7701)",
+   "url": "https://api.weather.gov/stations/E7701/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:18Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — Spanish Fork (FPS)",
+   "url": "https://api.weather.gov/stations/FPS/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:19Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — Draper (UT7)",
+   "url": "https://api.weather.gov/stations/UT7/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:19Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — Alpine (UTALP)",
+   "url": "https://api.weather.gov/stations/UTALP/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:19Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — Lehi (F3671)",
+   "url": "https://api.weather.gov/stations/F3671/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:19Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — South Valley Regional (KSVR)",
+   "url": "https://api.weather.gov/stations/KSVR/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:19Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — Salt Lake Intl (KSLC)",
+   "url": "https://api.weather.gov/stations/KSLC/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:20Z",
+   "ok": true
+  },
+  {
+   "label": "Observations — Provo (KPVU)",
+   "url": "https://api.weather.gov/stations/KPVU/observations?limit=6",
+   "fetched_at": "2026-11-12T02:04:20Z",
+   "ok": true
+  },
+  {
+   "label": "NWS grid lookup — POM South",
+   "url": "https://api.weather.gov/points/40.4567,-111.9027",
+   "fetched_at": "2026-11-12T02:04:20Z",
+   "ok": true
+  },
+  {
+   "label": "NWS hourly forecast — POM South launch",
+   "url": "https://api.weather.gov/gridpoints/SLC/98,162",
+   "fetched_at": "2026-11-12T02:04:20Z",
+   "ok": true
+  },
+  {
+   "label": "NWS grid lookup — POM North",
+   "url": "https://api.weather.gov/points/40.4745,-111.8928",
+   "fetched_at": "2026-11-12T02:04:20Z",
+   "ok": true
+  },
+  {
+   "label": "NWS hourly forecast — POM North launch",
+   "url": "https://api.weather.gov/gridpoints/SLC/99,162",
+   "fetched_at": "2026-11-12T02:04:21Z",
+   "ok": true
+  },
+  {
+   "label": "NWS grid lookup — Cherry",
+   "url": "https://api.weather.gov/points/40.5153,-111.827",
+   "fetched_at": "2026-11-12T02:04:21Z",
+   "ok": true
+  },
+  {
+   "label": "NWS hourly forecast — Cherry launch",
+   "url": "https://api.weather.gov/gridpoints/SLC/101,164",
+   "fetched_at": "2026-11-12T02:04:21Z",
+   "ok": true
+  }
+ ]
+}

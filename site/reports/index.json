@@ -1,6 +1,11 @@
 {
  "reports": [
   {
+   "id": "2026-11-12T0204Z",
+   "generated_at": "2026-11-12T02:04:18Z",
+   "summary": "No go slots"
+  },
+  {
    "id": "2026-11-11T0057Z",
    "generated_at": "2026-11-11T00:57:29Z",
    "summary": "Go: POM North Wed PM, POM South Thu PM, Cherry Wed PM"
