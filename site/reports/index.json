@@ -1,6 +1,11 @@
 {
  "reports": [
   {
+   "id": "2026-11-15T0033Z",
+   "generated_at": "2026-11-15T00:33:51Z",
+   "summary": "No go slots"
+  },
+  {
    "id": "2026-11-14T0108Z",
    "generated_at": "2026-11-14T01:08:40Z",
    "summary": "Go: POM South Sun PM"
