@@ -1,6 +1,11 @@
 {
  "reports": [
   {
+   "id": "2026-11-18T0240Z",
+   "generated_at": "2026-11-18T02:40:37Z",
+   "summary": "No go slots"
+  },
+  {
    "id": "2026-11-17T0319Z",
    "generated_at": "2026-11-17T03:19:29Z",
    "summary": "No go slots"
